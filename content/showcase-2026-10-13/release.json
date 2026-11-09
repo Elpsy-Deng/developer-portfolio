@@ -1,0 +1,286 @@
+{
+  "schema": 1,
+  "release": "showcase-2026-10-13",
+  "sources": {
+    "fadaiting-camp": "407574be535a8409627a65b0ef4cac6bb3f4e0ef",
+    "shop_bak_ap": "339051d4ae73dd9ad35e92f4cf2c3b84da4da076",
+    "Shop_back": "910af78355ed50590a978683c2e7217f8444b991",
+    "Shop_app": "cc8d852e24af2b4dd63c51106873d8123ce9d117",
+    "ai-knowledge-assistant": "abc49c59da821a2af101da78315448d820850eef",
+    "ticket-platform": "18d16a4eed0ca95196302c221ef00526d592f06f",
+    "developer-portfolio": "a58a6348c3089e2e5429a05d32cfb806c75df739"
+  },
+  "projects": [
+    {
+      "slug": "fadaiting-camp",
+      "patch": {
+        "challenges": [
+          {
+            "title": "情境：最後一個營位，同時有人預約與取消",
+            "description": "需求：按住宿每一晚核對營位及租借數量。決策：預約與釋放由後端交易處理，不以頁面顯示的餘額當保證。BookingServiceImpl 先鎖租借資料，再由 inventory service 保留逐晚營位。取捨：不同日期與租借品要一起核對；付款保留期限到期也不能釋放已收款的住宿。"
+          },
+          {
+            "title": "情境：旅客重複收到通知，或 SMTP 回應不明",
+            "description": "決策：業務交易寫入通知佇列，以事件唯一鍵去重；worker 用 SKIP LOCKED、短租約與有界退避處理。SMTP 結果不明時轉人工核對，過期 worker 不能覆蓋結果。取捨：這是可靠工作狀態與人工恢復，不保證外部郵件恰好送達一次；模擬通知不計為已寄信。"
+          },
+          {
+            "title": "證據與邊界：先驗隔離還原，再談正式切換",
+            "description": "固定來源保存 PostgreSQL17 隔離 pg_dump/restore 與資料指紋證據。新目標還原不動來源，核對中文、预约與付款／通知紀錄。取捨：本機PG18、MinIO及正式切換仍未驗，不能把Cloud小資料演練當成完整災難復原承諾。"
+          }
+        ],
+        "architectureDescription": "Vue 將預約與營運指令交给 Java25／Spring Boot4 API；角色政策與CSRF在入口核對，PG交易處理逐晚營位／租借、住宿、付款與audit。Redis用於既有支援功能；通知另由PG佇列與worker處理。MinIO屬素材儲存，並非預約票額來源。架構圖為固定來源程式的整理，不表示真金流或通知已上線。",
+        "evidenceLinks": [
+          {
+            "label": "逐晚預約與釋放程式",
+            "url": "https://github.com/Elpsy-Deng/fadaiting-camp/blob/407574be535a8409627a65b0ef4cac6bb3f4e0ef/backend/src/main/java/com/fadaiting/camp/service/impl/BookingServiceImpl.java"
+          },
+          {
+            "label": "通知佇列與租約程式",
+            "url": "https://github.com/Elpsy-Deng/fadaiting-camp/blob/407574be535a8409627a65b0ef4cac6bb3f4e0ef/backend/src/main/java/com/fadaiting/camp/service/NotificationQueueService.java"
+          },
+          {
+            "label": "歷史Cloud展示驗證",
+            "url": "https://github.com/Elpsy-Deng/fadaiting-camp/blob/407574be535a8409627a65b0ef4cac6bb3f4e0ef/docs/verification/demo-closeout-2026-10-06.json"
+          },
+          {
+            "label": "歷史隔離還原證據",
+            "url": "https://github.com/Elpsy-Deng/fadaiting-camp/blob/407574be535a8409627a65b0ef4cac6bb3f4e0ef/docs/verification/backup-restore-2026-10-06.json"
+          }
+        ],
+        "evidenceCheckedAt": "2026-10-13"
+      },
+      "media": [
+        {
+          "file": "architecture/fadaiting-camp.png",
+          "sha256": "05fe43c76d8699839a30f6bbf4abe9c997b06ab5092b74c5334a82a16878736f",
+          "title": "架構說明圖 · fadaiting-camp",
+          "description": "依固定版本原始碼與文件整理的架構說明圖，非來源應用操作截圖；圖中的外部服務與正式部署以案例限制為準。",
+          "alt": "fadaiting-camp 的程式分層與資料路徑；架構說明圖，非產品截圖。"
+        }
+      ]
+    },
+    {
+      "slug": "elpsy-shop",
+      "patch": {
+        "challenges": [
+          {
+            "title": "情境：現貨與預購同時結帳，卻沒有同一種庫存",
+            "description": "決策：現貨SKU庫存與預購批次配額分開；下單保存快照與限時保留，整筆預購付款、取消與退款由原訂單核對。取捨：批次到貨、分配、出貨前核對都有自己的狀態；不把預購配額當已到貨的實體庫存。"
+          },
+          {
+            "title": "情境：App 送出後斷線，不知道原操作是否成功",
+            "description": "決策：保留原 owner／UUID／body，先查原操作結果；版本寫入先讀確認，收到ACK後再GET失敗也不重新下單。Web Cookie/CSRF與App Bearer裝置session分隔，refresh輪替不能混用realm。取捨：結果不明需核對，網路恢復不是重新產生UUID的理由。"
+          },
+          {
+            "title": "證據與邊界：模擬交易、APK建置與裝置驗收分开",
+            "description": "歷史後端、HTTP與DB不變條件證據支持交易流程；Flutter unit/widget與建置支持第一版App。取捨：CI重建APK與已驗雲端APK簽章/hash不同，不能沿用裝置驗收；真機/iOS、商家provider與正式上架仍待。"
+          }
+        ],
+        "architectureDescription": "Vue網站與獨立Flutter App共用Spring Boot3.2.1／Java17／MyBatis後端。MySQL保存會員、快照、現貨及預購批次；Redis處理Session。Web Cookie/CSRF與App Bearer裝置realm隔離。SeaweedFS保存主圖，通知由outbox管理；付款、配送、退款與通知provider仍為模擬。",
+        "evidenceLinks": [
+          {
+            "label": "預購批次與訂單程式",
+            "url": "https://github.com/Elpsy-Deng/shop_bak_ap/blob/339051d4ae73dd9ad35e92f4cf2c3b84da4da076/src/main/java/com/shop/elpsy/service/PreorderOrderService.java"
+          },
+          {
+            "label": "整筆預購交易程式",
+            "url": "https://github.com/Elpsy-Deng/shop_bak_ap/blob/339051d4ae73dd9ad35e92f4cf2c3b84da4da076/src/main/java/com/shop/elpsy/service/PreorderMoneyService.java"
+          },
+          {
+            "label": "App固定版本與裝置邊界",
+            "url": "https://github.com/Elpsy-Deng/Shop_app/blob/cc8d852e24af2b4dd63c51106873d8123ce9d117/docs/HANDOFF.md"
+          },
+          {
+            "label": "網站固定版本",
+            "url": "https://github.com/Elpsy-Deng/Shop_back/blob/910af78355ed50590a978683c2e7217f8444b991/docs/HANDOFF.md"
+          },
+          {
+            "label": "後端驗證與限制",
+            "url": "https://github.com/Elpsy-Deng/shop_bak_ap/blob/339051d4ae73dd9ad35e92f4cf2c3b84da4da076/docs/HANDOFF.md"
+          }
+        ],
+        "evidenceCheckedAt": "2026-10-13"
+      },
+      "media": [
+        {
+          "file": "architecture/elpsy-shop.png",
+          "sha256": "a71a44ebe67da0ff741747d639b4e82900bef32a8c981f54a70f6a1bc75a5d2f",
+          "title": "架構說明圖 · elpsy-shop",
+          "description": "依固定版本原始碼與文件整理的架構說明圖，非來源應用操作截圖；圖中的外部服務與正式部署以案例限制為準。",
+          "alt": "elpsy-shop 的程式分層與資料路徑；架構說明圖，非產品截圖。"
+        }
+      ]
+    },
+    {
+      "slug": "ticket-platform",
+      "patch": {
+        "challenges": [
+          {
+            "title": "情境：收到202，但MQ重送、worker中斷或票已售完",
+            "description": "決策：PG持久請求與outbox先保存原UUID/body，publisher confirms與worker commit後ACK處理至少一次投遞；PG交易負責限購、正式票額、訂單與去重。取捨：PROCESSING/202只代表已受理，只有RESERVED與正式訂單才開始付款期限。"
+          },
+          {
+            "title": "情境：Redis已預扣，PG尚未完成，來源投影變髒",
+            "description": "決策：Lua使用有界ledger、generation與receipt，不裸DECR/INCR；正式stock revision使投影DIRTY，需依持久證據核對。取捨：Redis Lua與PG/MQ沒有共同原子交易，outbox不會補上Redis到PG的故障窗口；未知結果不能盲目補票。"
+          },
+          {
+            "title": "證據與邊界：故障恢復不等於持續高吞吐",
+            "description": "固定M6B小批量12張只有8張RESERVED，餘4張受DIRTY gate限制；M6D629項與M6C有界還原是不同條件的歷史證據。取捨：單PG/Redis/MQ與單broker quorum queues，不宣稱多broker HA、最大容量、手機驗票或持續大量搶票。"
+          }
+        ],
+        "architectureDescription": "Vue等候室控制入口，API把購票命令與outbox存入PG，再由publisher送RabbitMQ，nonweb worker在PG交易內去重與保票，commit後ACK。Redis承擔等候室／限流及另行啟用的Lua預扣；它不是正式票額來源。正式stock revision讓預扣投影DIRTY，不能直接接續流量。",
+        "evidenceLinks": [
+          {
+            "label": "正式票額與非同步架構",
+            "url": "https://github.com/Elpsy-Deng/ticket-platform/blob/18d16a4eed0ca95196302c221ef00526d592f06f/docs/ARCHITECTURE.md"
+          },
+          {
+            "label": "Outbox與publisher confirms",
+            "url": "https://github.com/Elpsy-Deng/ticket-platform/blob/18d16a4eed0ca95196302c221ef00526d592f06f/backend/src/main/java/dev/elpsy/ticket/delivery/OutboxPublisher.java"
+          },
+          {
+            "label": "有界Lua ledger程式",
+            "url": "https://github.com/Elpsy-Deng/ticket-platform/blob/18d16a4eed0ca95196302c221ef00526d592f06f/backend/src/main/resources/redis/ticket-ledger.lua"
+          },
+          {
+            "label": "M6D實作／部分完成／限制",
+            "url": "https://github.com/Elpsy-Deng/ticket-platform/blob/18d16a4eed0ca95196302c221ef00526d592f06f/docs/FEATURE_STATUS.md"
+          }
+        ],
+        "evidenceCheckedAt": "2026-10-13"
+      },
+      "media": [
+        {
+          "file": "architecture/ticket-platform.png",
+          "sha256": "922a1e29014e96940d523225546d2ead84201e5ed83acf35044d7981790b27f0",
+          "title": "架構說明圖 · ticket-platform",
+          "description": "依固定版本原始碼與文件整理的架構說明圖，非來源應用操作截圖；圖中的外部服務與正式部署以案例限制為準。",
+          "alt": "ticket-platform 的程式分層與資料路徑；架構說明圖，非產品截圖。"
+        }
+      ]
+    },
+    {
+      "slug": "ai-knowledge-assistant",
+      "patch": {
+        "challenges": [
+          {
+            "title": "情境：文件沒有權限，卻被向量索引找到",
+            "description": "決策：後端先取得已授權的最新PG快照，再核對索引候選；只有允許的chunk可進fusion/reranking/model context，輸出的引用再次核對。取捨：索引不是權限來源，事後遮蔽答案無法撤回已送入模型的私有上下文。"
+          },
+          {
+            "title": "情境：問法不同但應找到同一段，或高分片段缺少條件",
+            "description": "決策：PostgreSQL詞法與BGE-M3/Qdrant向量候選以RRF融合，再用reranker有界選段；Qwen3 4B僅在允許证据中產生回答，引用不能越出context。取捨：rerank門檻可能誤拒答，局部高分也可能漏條件，保留失敗題與來源核對。"
+          },
+          {
+            "title": "證據與邊界：37/40不是可泛化準確率",
+            "description": "歷史40題功能驗收37/40、holdout22/24與45後端回歸支持固定資料條件。取捨：題集由實作助理編寫，保留誤拒答、漏條件與原因混淆；本機模型、個人文件品質與長期資源仍需使用者環境補驗，不能宣稱獨立語意準確率。"
+          }
+        ],
+        "architectureDescription": "Vue把背景查詢交給Spring Boot。PG/RBAC決定可讀文件與最新chunk；詞法與BGE-M3/Qdrant候選經授權快照核對後RRF融合、reranking，再交免費本地Qwen3 4B產生回答。回傳前檢查引用屬於允許context；模型、向量索引與資料權限分層。",
+        "evidenceLinks": [
+          {
+            "label": "授權候選／RRF／引用核對程式",
+            "url": "https://github.com/Elpsy-Deng/ai-knowledge-assistant/blob/abc49c59da821a2af101da78315448d820850eef/backend/src/main/java/dev/knowledge/RagEngine.java"
+          },
+          {
+            "label": "向量索引程式",
+            "url": "https://github.com/Elpsy-Deng/ai-knowledge-assistant/blob/abc49c59da821a2af101da78315448d820850eef/backend/src/main/java/dev/knowledge/QdrantVectorIndex.java"
+          },
+          {
+            "label": "品質題集與失敗案例",
+            "url": "https://github.com/Elpsy-Deng/ai-knowledge-assistant/blob/abc49c59da821a2af101da78315448d820850eef/docs/QUALITY_EVALUATION.md"
+          },
+          {
+            "label": "歷史模型與回歸證據",
+            "url": "https://github.com/Elpsy-Deng/ai-knowledge-assistant/blob/abc49c59da821a2af101da78315448d820850eef/docs/VERIFICATION.md"
+          }
+        ],
+        "evidenceCheckedAt": "2026-10-13"
+      },
+      "media": [
+        {
+          "file": "architecture/ai-knowledge-assistant.png",
+          "sha256": "ef42d2c14ec88c7d69189f04e7de914a0a98964bff45ba1d32d17977d795eb97",
+          "title": "架構說明圖 · ai-knowledge-assistant",
+          "description": "依固定版本原始碼與文件整理的架構說明圖，非來源應用操作截圖；圖中的外部服務與正式部署以案例限制為準。",
+          "alt": "ai-knowledge-assistant 的程式分層與資料路徑；架構說明圖，非產品截圖。"
+        }
+      ]
+    },
+    {
+      "slug": "developer-portfolio",
+      "patch": {
+        "statusNote": "公開／管理平台、協調備份還原、私人同源Docker交付與實際GitHub CI已驗證；公開HTTPS與個人資料仍待。",
+        "features": [
+          "Vue3公開作品列表、詳情、搜尋 API、分類與穩定分頁；PostgreSQL是唯一內容來源，斷線不使用靜態fallback。",
+          "ADMIN/VIEWER、CSRF與PG Session；PostgreSQL 原子／有界登入配額、8小時絕對期限，帳號治理與最後管理員保護已加入。",
+          "作品CRUD／expectedVersion、同交易snapshot稽核、PNG/JPEG驗證重編碼與引用感知回收。",
+          "動態分類／技術、引用刪除保護、改名連帶作品版本；本人改密碼與全部Session撤銷。",
+          "協調offline PG＋media備份、全新scope隔離還原、資料/權限/圖片fingerprint與Session排除。",
+          "標準Dockerfile、獨立一次性migration、reader-only schema validate、同源Nginx與相容app回退。",
+          "GitHub Hosted CI實際首輪成功；隔離PG完整package、frontend build、27容器/43browser，只上傳安全summary。"
+        ],
+        "plannedGoals": [
+          "忘記密碼重設的可信免費交付、稽核導出與排序操作改善。",
+          "公開HTTPS／可信proxy、備份加密／離機／排程與使用者本機長時間驗收。"
+        ],
+        "verification": [
+          "2026/10/13 固定CI實作54e2ad2：實際GitHub Hosted 105後端tests／9 suites、27容器checks、43browser通過，failure/error/skip/flaky0。",
+          "Vue typecheck/production build、標準Dockerfile、官方固定PG image、always cleanup與安全artifact上傳均成功；run38351233282。",
+          "Phase4H歷史7 artifact guards／48 backup-restore checks；CI本輪只重跑7 guards，沒有把48或原74host-runtime算為本次重跑。"
+        ],
+        "limitations": [
+          "私人loopback HTTP；公開HTTPS／可信proxy與真訪客IP配額未驗收，不是正式公網部署。",
+          "圖片為免費local storage adapter，SeaweedFS/S3未串接；目前備份未加密、未離機，restore切換非自動化。",
+          "帳號治理與最後管理員保護已加入；忘記密碼重設／可信交付仍待。",
+          "同V9相容app回退不會schema downgrade；UI部分503/429/到期案例是明確stub，真PG/API故障另驗。",
+          "個人姓名、聯絡方式、真實任職經歷暫不公開；四來源作品數字是固定版本歷史證據。"
+        ],
+        "challenges": [
+          {
+            "title": "情境：公開查詢與後台寫入不能共用owner權限",
+            "description": "決策：reader/auth/writer/identity/credentials五組runtime角色分工，ADMIN API再驗角色、CSRF、expectedVersion與同交易audit。獨立migration只持owner secret，deploy API禁止啟用Flyway並用reader validate。取捨：更多datasource/權限設定要驗，但API故障不需要DDL或bootstrap權限。"
+          },
+          {
+            "title": "情境：資料庫備份正常，圖片卻與引用版本不一致",
+            "description": "決策：停止所有應用/維護寫入、NOLOGIN協調窗口，PG dump與local media同窗口fingerprint，fresh target restore核對ACL、ledger與bytes；不複製Session資料。取捨：manual offline有停機，私有同磁碟副本不是加密或異地備援，來源操作失敗需恢復存取。"
+          },
+          {
+            "title": "情境：本地測試綠燈，但真正容器或Hosted無法啟動",
+            "description": "決策：固定JAR/dist跑實際Nginx、非root/RO與秘密分離，故障候選後回退原image；GitHub使用同一隔離工具並只上傳numeric/hash summary。取捨：保留VFS ENOSPC、proxy403與前期失敗，沒有放寬schema/security來換成功；setup/cleanup/upload和本地結果分開核對。"
+          }
+        ],
+        "architectureDescription": "Nginx提供Vue production dist與同源API。Java21／Spring Boot3.5.16 deploy profile使用reader及四組最小runtime角色；PG持久catalog、身份、Session、版本/audit/quota，local adapter持久媒體。migration是非web單次owner entry point。GitHub CI只驗證／清理與上傳safe summary，不部署正式服務。",
+        "evidenceLinks": [
+          {
+            "label": "獨立migration與相容回退",
+            "url": "https://github.com/Elpsy-Deng/developer-portfolio/blob/a58a6348c3089e2e5429a05d32cfb806c75df739/docs/DEPLOYMENT.md"
+          },
+          {
+            "label": "協調備份與隔離還原",
+            "url": "https://github.com/Elpsy-Deng/developer-portfolio/blob/a58a6348c3089e2e5429a05d32cfb806c75df739/docs/BACKUP_RESTORE.md"
+          },
+          {
+            "label": "CI實作與安全證據",
+            "url": "https://github.com/Elpsy-Deng/developer-portfolio/blob/a58a6348c3089e2e5429a05d32cfb806c75df739/docs/CI.md"
+          },
+          {
+            "label": "實際GitHub Hosted CI首輪（SUCCESS）",
+            "url": "https://github.com/Elpsy-Deng/developer-portfolio/actions/runs/38351233282"
+          }
+        ],
+        "evidenceCheckedAt": "2026-10-13",
+        "duration": "Phase 5C 展示內容與架構 · 2026/10/13"
+      },
+      "media": [
+        {
+          "file": "architecture/developer-portfolio.png",
+          "sha256": "72af8536ba9bd36023c452ca883ec4f1f5dad3f54a4eef36d9c64054edee09fb",
+          "title": "架構說明圖 · developer-portfolio",
+          "description": "依固定版本原始碼與文件整理的架構說明圖，非來源應用操作截圖；圖中的外部服務與正式部署以案例限制為準。",
+          "alt": "developer-portfolio 的程式分層與資料路徑；架構說明圖，非產品截圖。"
+        }
+      ]
+    }
+  ]
+}

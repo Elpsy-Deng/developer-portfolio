@@ -1,0 +1,19 @@
+digraph G {
+graph [rankdir=LR,bgcolor="#f6f8f4",pad="0.4",nodesep="0.45",ranksep="0.65",fontname="Noto Sans CJK TC",size="12,6!",dpi=110,label="ai-knowledge-assistant\n架構說明圖 · 固定來源程式整理 · 非產品操作截圖",labelloc=t,fontsize=17];
+node [shape=box,style="rounded,filled",fillcolor="white",color="#3b7759",fontname="Noto Sans CJK TC",fontsize=12,margin="0.18,0.13"];
+edge [color="#6b7e70",fontname="Noto Sans CJK TC",fontsize=10];
+web [label="Vue：背景查詢／來源"];
+pg [label="PG / RBAC\n最新授權文件與chunk"];
+lex [label="詞法候選"];
+vector [label="BGE-M3 / Qdrant\n向量候選"];
+rank [label="核對授權 → RRF → reranker"];
+llm [label="本地Qwen3 4B"];
+result [label="引用核對／回答或拒答"];
+web -> pg [label="先確定權限"];
+pg -> lex [label="只用允許範圍"];
+pg -> vector [label="候選再核對快照"];
+lex -> rank [label="融合"];
+vector -> rank [label="融合"];
+rank -> llm [label="有界證據context"];
+llm -> result [label="引用須在context"];
+}

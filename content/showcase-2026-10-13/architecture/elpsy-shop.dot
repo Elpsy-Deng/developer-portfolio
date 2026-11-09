@@ -1,0 +1,18 @@
+digraph G {
+graph [rankdir=LR,bgcolor="#f6f8f4",pad="0.4",nodesep="0.45",ranksep="0.65",fontname="Noto Sans CJK TC",size="12,6!",dpi=110,label="elpsy-shop\n架構說明圖 · 固定來源程式整理 · 非產品操作截圖",labelloc=t,fontsize=17];
+node [shape=box,style="rounded,filled",fillcolor="white",color="#3b7759",fontname="Noto Sans CJK TC",fontsize=12,margin="0.18,0.13"];
+edge [color="#6b7e70",fontname="Noto Sans CJK TC",fontsize=10];
+web [label="Vue 網站\nCookie／CSRF"];
+app [label="Flutter App\nBearer 裝置Session"];
+api [label="Java17 / Spring Boot3.2.1\nMyBatis／交易核對"];
+db [label="MySQL\n現貨庫存 ≠ 預購配額"];
+redis [label="Redis：Session"];
+files [label="SeaweedFS：主圖"];
+mock [label="付款／物流／通知\nprovider仍mock"];
+web -> api [label="Web realm"];
+app -> api [label="App realm"];
+api -> db [label="快照、保留、交易"];
+api -> redis [label="身份狀態"];
+api -> files [label="素材"];
+api -> mock [label="有界模擬流程"];
+}

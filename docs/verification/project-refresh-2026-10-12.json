@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-12",
+  "baselineCommit": "4d2eec1a8d9c37579aa258aa055a776737af7031",
+  "scope": "frontend portfolio content and evidence refresh; no platform backend or source-project revalidation",
+  "sources": {
+    "fadaiting-camp": {
+      "commit": "407574be535a8409627a65b0ef4cac6bb3f4e0ef",
+      "documents": [
+        {
+          "path": "docs/verification/demo-closeout-2026-10-06.json",
+          "sha256": "b3dd628ed2d2c9374a7ad04547d1dec561f3ec5fdf5ced3007fe857ef38ff3fe"
+        },
+        {
+          "path": "DEMO_WALKTHROUGH.md",
+          "sha256": "a607761823a19f3eec10f00f7ba5b750dfb173a3828ac044da806f9671f92b3a"
+        },
+        {
+          "path": "docs/verification/backup-restore-2026-10-06.json",
+          "sha256": "d2a4ef007fe5b2b2484ba1d88e842e8229656d8b4eff0693d95d6df846496d1f"
+        }
+      ]
+    },
+    "shop_bak_ap": {
+      "commit": "339051d4ae73dd9ad35e92f4cf2c3b84da4da076",
+      "documents": [
+        {
+          "path": "docs/HANDOFF.md",
+          "sha256": "c6543fb2edaf104121cbfb743cc6a0b4da8885be210e2cb3d1bc97e272d96ae9"
+        }
+      ]
+    },
+    "Shop_back": {
+      "commit": "910af78355ed50590a978683c2e7217f8444b991",
+      "documents": [
+        {
+          "path": "docs/HANDOFF.md",
+          "sha256": "17f50b4ef526b41a9b4f4f2564e3e0cc778705c0733b44d65ca3dd973736c62e"
+        }
+      ]
+    },
+    "Shop_app": {
+      "commit": "cc8d852e24af2b4dd63c51106873d8123ce9d117",
+      "documents": [
+        {
+          "path": "docs/HANDOFF.md",
+          "sha256": "39cf7ca2bb6a5450d6eb04242434b7ef77e948474fb225d87d7b19b442dc13ba"
+        },
+        {
+          "path": "docs/verification/customer-app-device-2026-10-08.json",
+          "sha256": "252c92e19b9d9135c1b8c0aedf057a4328e2a6336f658eacdcfe86c0754fa64c"
+        }
+      ]
+    },
+    "ai-knowledge-assistant": {
+      "commit": "abc49c59da821a2af101da78315448d820850eef",
+      "documents": [
+        {
+          "path": "docs/QUALITY_EVALUATION.md",
+          "sha256": "02eba0022dfcbf4ffe1074d44c6c8b221e3d0958ada1f655bf89b5f01f469f66"
+        },
+        {
+          "path": "docs/VERIFICATION.md",
+          "sha256": "03d316e384c6085a204987632ea188497c1da181e938b0c21650c81e2611890e"
+        },
+        {
+          "path": "docs/ROLE_DEMO.md",
+          "sha256": "8a4ab7f6beba7701420e05e24ba006b339dcae1c0976475ca313db7f79f71733"
+        }
+      ]
+    },
+    "ticket-platform": {
+      "commit": "18d16a4eed0ca95196302c221ef00526d592f06f",
+      "documents": [
+        {
+          "path": "docs/verification/showcase-m6d-2026-10-12.md",
+          "sha256": "8d91b6ca26565f04dbcef8fad4ed4c6504199615ff27c481441bfe89e10d8cea"
+        },
+        {
+          "path": "docs/verification/load-m6b-2026-10-12.md",
+          "sha256": "f50ed5af4368e9a34c4986ca4690a2702a6013452420198836aa629bb8355453"
+        },
+        {
+          "path": "docs/verification/backup-m6c-2026-10-12.md",
+          "sha256": "f2ad97f624a3b0345338c2fd72471c81703ac8ee04ac85262832b692ab73ea90"
+        },
+        {
+          "path": "docs/SHOWCASE.md",
+          "sha256": "2e1d6ab7ae609284fe3e5fa4f75684d8f2a572e86208b567cae5706feac0f986"
+        }
+      ]
+    }
+  },
+  "sourceDocumentChecks": 14,
+  "screenshots": [
+    {
+      "path": "public/projects/ai-knowledge-assistant/milestone4-rag-desktop.png",
+      "sha256": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174"
+    },
+    {
+      "path": "public/projects/ai-knowledge-assistant/milestone4-rag-mobile.png",
+      "sha256": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75"
+    }
+  ],
+  "build": {
+    "npmCi": true,
+    "vueTsc": true,
+    "viteProductionBuild": true,
+    "node": "24.19.0"
+  },
+  "browser": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "retries": 0,
+    "chromium": "151.0.7922.173",
+    "transport": "production Vite preview loopback",
+    "mobileWidths": [
+      320,
+      390
+    ],
+    "reportSha256": "4c41fa927c9f16328715c9afd3d6972c92eae2530770ac99dbb19f4050c637f7",
+    "desktopMobileScreenshotsManuallyViewed": true
+  },
+  "artifacts": {
+    "dist/favicon.svg": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a",
+    "dist/index.html": "f6430267e6f3e94c9fa0b174066df6e379c667d6ee41e5411959539e979a5a23",
+    "dist/assets/index-C3mtfJeF.css": "2a44ad7e6d0f07111df5073e7e5085e55d673a413867569be86ab43976b4fccd",
+    "dist/assets/SkillBadge-Cdwn7pQB.js": "60385e50afa0afcbe2c0aea3bfdb61da6352d178f07a528e2c8a55118bc521ab",
+    "dist/assets/AboutView-BFyeljUo.js": "6e0ab97f2a65de945599e75e79d77d60309ac68f629ac12e3bf33cfd6c3e0d65",
+    "dist/assets/profile-CIieAcHU.js": "42bd832a310c8ce570a61a8d4243d34cb8cd613ee3fddd9ae37378fcc9275309",
+    "dist/assets/ProjectDetailView-C4JJCba5.js": "32bce8fce69c09a066730b49243d56772971e23f10d6d5db10b30f5121bac1d9",
+    "dist/assets/ProjectCard-CANxUMwA.js": "86e30e66799d9d1f8615c11b33c0813afa6c1555363388411cb264fefe36a3d4",
+    "dist/assets/NotFoundView-ykTLchs2.js": "7f5e46e828cf0da73b8c7c8a468f42660bbda39733a3686a6760fc6f7e4f4461",
+    "dist/assets/PageSection-o_492dlm.js": "cbc1a8134a3af3685f721ce526f32afa1aabf5089dbe7378d99a67c510d575ba",
+    "dist/assets/ProjectStatusBadge-BHc1IxYT.js": "2dc2c961b70788ee5e095a06ee5588c191236c181fca494ea25bcafaa420f4ef",
+    "dist/assets/ProjectsView-3uLycbKQ.js": "766edbc3fc605fbfc26485c044d3153ad1fcf426f48cf76f65db047d1041b1d4",
+    "dist/assets/HomeView-CxFUp3q6.js": "4228f7644abc8c1638781c07691f1182bab28ae82b274c32c94fc13c5a57edf4",
+    "dist/assets/index-Dm8Ivkna.js": "7e58c93ea0f31667449d48f9cc9d67a20188499f88b938ebea9caa6f42c3b347",
+    "dist/projects/e-commerce-platform/storefront-mobile.jpg": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08",
+    "dist/projects/e-commerce-platform/order-confirmation.jpg": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35",
+    "dist/projects/e-commerce-platform/storefront-desktop.jpg": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec",
+    "dist/projects/ai-knowledge-assistant/04-document-library.png": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-mobile.png": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75",
+    "dist/projects/ai-knowledge-assistant/06-mobile.png": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1",
+    "dist/projects/ai-knowledge-assistant/01-workspace.png": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4",
+    "dist/projects/ai-knowledge-assistant/03-insufficient-evidence.png": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1",
+    "dist/projects/ai-knowledge-assistant/05-untrusted-document.png": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f",
+    "dist/projects/ai-knowledge-assistant/02-answer-sources.png": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-desktop.png": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174"
+  },
+  "preservedFailures": [
+    {
+      "run": "project-refresh-1",
+      "result": "test server port15173 occupied; did not reuse or stop existing service"
+    },
+    {
+      "run": "project-refresh-2",
+      "passed": 4,
+      "failed": 5,
+      "result": "four selectors omitted decorative title dot; image test did not scroll lazy-loaded images into view"
+    },
+    {
+      "run": "project-refresh-3",
+      "passed": 9,
+      "failed": 0
+    }
+  ],
+  "cleanup": {
+    "elpsyAuthorizedDraftFilesDiscarded": 28,
+    "ignoredDataAndEvidencePreserved": true,
+    "publicHttpsCreated": false
+  },
+  "notVerified": [
+    "source applications revalidation",
+    "real models",
+    "App devices/iOS",
+    "public HTTPS",
+    "platform backend/database/admin"
+  ]
+}

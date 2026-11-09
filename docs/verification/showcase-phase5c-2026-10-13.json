@@ -1,0 +1,180 @@
+{
+  "milestone": "Phase5C reviewed showcase release",
+  "date": "2026-10-13",
+  "baseline": "a58a6348c3089e2e5429a05d32cfb806c75df739",
+  "localEquivalent": {
+    "schema": 1,
+    "commit": "a58a6348c3089e2e5429a05d32cfb806c75df739",
+    "outcome": "PASS",
+    "completedStages": [
+      "python-guards",
+      "backend-package",
+      "frontend-build",
+      "docker-build",
+      "container-browser-acceptance"
+    ],
+    "backend": {
+      "suites": 9,
+      "tests": 105,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "runtime": {
+      "checksPassed": 27,
+      "browser": {
+        "expected": 43,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "cleanup": {
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0
+      },
+      "showcase": {
+        "checksPassed": 17,
+        "browser": {
+          "expected": 4,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      }
+    },
+    "artifacts": {
+      "jarSha256": "94a70cd3940ba6cbc52aa44d787ed0787e6c09b0d9ec90377e43b16ec780cd05",
+      "distTreeSha256": "549f7de992400c3f9e1ab8336b0eb90283bd0f3fa3c7de6f98256c0d3f2cba5a",
+      "migrationCount": 9,
+      "publicAssetCount": 12
+    },
+    "cleanup": "PASS"
+  },
+  "pythonGuards": {
+    "backup": 7,
+    "ciEvidence": 7,
+    "showcaseRelease": 4,
+    "outcome": "PASS"
+  },
+  "sources": {
+    "fadaiting-camp": "407574be535a8409627a65b0ef4cac6bb3f4e0ef",
+    "shop_bak_ap": "339051d4ae73dd9ad35e92f4cf2c3b84da4da076",
+    "Shop_back": "910af78355ed50590a978683c2e7217f8444b991",
+    "Shop_app": "cc8d852e24af2b4dd63c51106873d8123ce9d117",
+    "ai-knowledge-assistant": "abc49c59da821a2af101da78315448d820850eef",
+    "ticket-platform": "18d16a4eed0ca95196302c221ef00526d592f06f",
+    "developer-portfolio": "a58a6348c3089e2e5429a05d32cfb806c75df739"
+  },
+  "releaseSha256": "b5502dd6d6f4d8dacac0736ad556f32498e3c2ae6a2d5bd382b551bb9ae0f2cd",
+  "screenshots": [
+    {
+      "file": "docs/screenshots/showcase-2026-10-13/ai-knowledge-assistant-platform-showcase-390.png",
+      "sha256": "6514135024bde4830101b7339b82ce7a00c86b02bff04a89e16baec74094303b",
+      "kind": "Actual portfolio page / synthetic isolated PG fixtures, not source application screenshot"
+    },
+    {
+      "file": "docs/screenshots/showcase-2026-10-13/developer-portfolio-platform-showcase-390.png",
+      "sha256": "7d1312db688a5847788773b6b4d35eb256c71babee03590eabdebf4d4a9cf651",
+      "kind": "Actual portfolio page / synthetic isolated PG fixtures, not source application screenshot"
+    },
+    {
+      "file": "docs/screenshots/showcase-2026-10-13/elpsy-shop-platform-showcase-390.png",
+      "sha256": "f2d6c6bdbc1cd4493c81bce942f2b04141112669f0ef41a7fd4f5e0a81bdb364",
+      "kind": "Actual portfolio page / synthetic isolated PG fixtures, not source application screenshot"
+    },
+    {
+      "file": "docs/screenshots/showcase-2026-10-13/fadaiting-camp-platform-showcase-390.png",
+      "sha256": "568a86f7d838cb186aadf9ce5dda01d051ce8815371f160a0f978402e2fdfa56",
+      "kind": "Actual portfolio page / synthetic isolated PG fixtures, not source application screenshot"
+    },
+    {
+      "file": "docs/screenshots/showcase-2026-10-13/ticket-platform-platform-showcase-390.png",
+      "sha256": "6b004fd3ae3ff0786fbec56b8c5497e098e4be9469dd44804c4c8c04a2c6152d",
+      "kind": "Actual portfolio page / synthetic isolated PG fixtures, not source application screenshot"
+    }
+  ],
+  "hosted": {
+    "status": "SUCCESS",
+    "runId": 38356320602,
+    "url": "https://github.com/Elpsy-Deng/developer-portfolio/actions/runs/38356320602",
+    "jobId": 115159947674,
+    "commit": "685258743ac21f0c7c71f23f166206bc521ba57e",
+    "artifactId": 11792709921,
+    "artifactSizeInBytes": 626,
+    "zipEntries": [
+      "summary.json"
+    ],
+    "defaultOfficialPinnedPg": true,
+    "summary": {
+      "schema": 1,
+      "commit": "685258743ac21f0c7c71f23f166206bc521ba57e",
+      "outcome": "PASS",
+      "completedStages": [
+        "python-guards",
+        "backend-package",
+        "frontend-build",
+        "docker-build",
+        "container-browser-acceptance"
+      ],
+      "backend": {
+        "suites": 9,
+        "tests": 105,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "runtime": {
+        "checksPassed": 27,
+        "browser": {
+          "expected": 43,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        },
+        "cleanup": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        },
+        "showcase": {
+          "checksPassed": 17,
+          "browser": {
+            "expected": 4,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0
+          }
+        }
+      },
+      "artifacts": {
+        "jarSha256": "2fbad29ceb2992ef1f456bb2ad565748c89dca1625c396e07fe432826fa5d974",
+        "distTreeSha256": "549f7de992400c3f9e1ab8336b0eb90283bd0f3fa3c7de6f98256c0d3f2cba5a",
+        "migrationCount": 9,
+        "publicAssetCount": 12
+      },
+      "cleanup": "PASS"
+    }
+  },
+  "failedLocalAttempt": {
+    "outcome": "FAIL",
+    "backend": 105,
+    "existingContainer": 27,
+    "existingBrowser": 43,
+    "showcaseApiBeforeBrowser": 15,
+    "showcaseBrowserPassed": 3,
+    "showcaseBrowserFailed": 1,
+    "cause": "Illustration badge fix was made after initial dist freeze; assertion correctly saw ACTUAL SCREENSHOT. Preserved first result, rebuilt final dist/standard images in new output and full second run passed."
+  },
+  "limits": [
+    "User requested no public personal information; no invented experience/contact/location",
+    "Source application screenshots for camp/shop/ticket not available at fixed commits; placeholders remain",
+    "Five captured images are actual portfolio views with synthetic isolated fixtures, not source application runtime evidence",
+    "Per-project API/audit transactions, not all-five atomicity; partial/ambiguous outcomes require manual review",
+    "Same-media replay identified by metadata, not pixel-level origin attestation",
+    "OriginalV1-V9 and12public assets unchanged; no other source repository/service modified or started",
+    "Local PG17.11 existing flat image override; hosted default official image verified separately"
+  ],
+  "codeCommit": "685258743ac21f0c7c71f23f166206bc521ba57e",
+  "localWorkingTree": "Local run at baseline plus Phase5C working tree; hosted evidence below checks the committed version independently"
+}

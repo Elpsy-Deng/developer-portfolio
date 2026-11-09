@@ -1,0 +1,123 @@
+{
+  "milestone": "Phase5B CI",
+  "date": "2026-10-13",
+  "baseline": "2d0020c66b3e5134a59b6897cd509f27b22b1284",
+  "localEquivalent": {
+    "schema": 1,
+    "commit": "2d0020c66b3e5134a59b6897cd509f27b22b1284",
+    "outcome": "PASS",
+    "completedStages": [
+      "python-guards",
+      "backend-package",
+      "frontend-build",
+      "docker-build",
+      "container-browser-acceptance"
+    ],
+    "backend": {
+      "suites": 9,
+      "tests": 105,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "runtime": {
+      "checksPassed": 27,
+      "browser": {
+        "expected": 43,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "cleanup": {
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0
+      }
+    },
+    "artifacts": {
+      "jarSha256": "d221060595761b7d32a1e7a4eaec6ba52e6c1a95d98fe6a07ca1ece44fd6419a",
+      "distTreeSha256": "ad28f93361096dee007370a17ea180023f8d00a2608bdd95e23fcc366376c1e0",
+      "migrationCount": 9,
+      "publicAssetCount": 12
+    },
+    "cleanup": "PASS"
+  },
+  "workflowLint": {
+    "tool": "actionlint",
+    "version": "1.7.12",
+    "outcome": "PASS"
+  },
+  "pythonGuards": {
+    "backupArtifactTests": 7,
+    "ciEvidenceTests": 6,
+    "outcome": "PASS"
+  },
+  "hosted": {
+    "status": "SUCCESS",
+    "runId": 38351233282,
+    "jobId": 115143878255,
+    "commit": "54e2ad20d970e22a7228f7c0ae0eca30b93319e3",
+    "url": "https://github.com/Elpsy-Deng/developer-portfolio/actions/runs/38351233282",
+    "artifactId": 11791365950,
+    "artifactZipBytes": 588,
+    "artifactFiles": [
+      "summary.json"
+    ],
+    "summary": {
+      "schema": 1,
+      "commit": "54e2ad20d970e22a7228f7c0ae0eca30b93319e3",
+      "outcome": "PASS",
+      "completedStages": [
+        "python-guards",
+        "backend-package",
+        "frontend-build",
+        "docker-build",
+        "container-browser-acceptance"
+      ],
+      "backend": {
+        "suites": 9,
+        "tests": 105,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "runtime": {
+        "checksPassed": 27,
+        "browser": {
+          "expected": 43,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        },
+        "cleanup": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        }
+      },
+      "artifacts": {
+        "jarSha256": "2fbad29ceb2992ef1f456bb2ad565748c89dca1625c396e07fe432826fa5d974",
+        "distTreeSha256": "ad28f93361096dee007370a17ea180023f8d00a2608bdd95e23fcc366376c1e0",
+        "migrationCount": 9,
+        "publicAssetCount": 12
+      },
+      "cleanup": "PASS"
+    },
+    "base": "Official pinned Compose PG image; no PORTFOLIO_PG_IMAGE override",
+    "allJobSteps": "SUCCESS"
+  },
+  "failedLocalAttempt": {
+    "outcome": "FAIL",
+    "stage": "container-browser-acceptance",
+    "cause": "VFS ENOSPC creating media directory; strict schema assertion refused false success",
+    "backendTestsPassed": 105,
+    "cleanup": "PASS",
+    "recovery": "Only previously identified own unused verification images/cache IDs removed; new output and full second run passed"
+  },
+  "limits": [
+    "Local PG17.11 single-layer base override; GitHub workflow uses official pinned PG image",
+    "No production secrets, automatic deployment, image publication or repository policy/billing changes",
+    "Only generated numeric/hash summary uploaded, never raw work/log/XML/trace/credentials",
+    "Local and hosted JAR hashes differ per build; SQL/public and fixed-in-run artifacts verified, no cross-build bitwise reproducibility claim"
+  ]
+}

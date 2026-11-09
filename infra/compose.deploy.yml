@@ -1,0 +1,76 @@
+services:
+  postgres:
+    image: ${PORTFOLIO_PG_IMAGE:-postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24}
+    environment:
+      POSTGRES_DB: ${PORTFOLIO_DATABASE:?Dedicated database required}
+      POSTGRES_USER: portfolio_bootstrap
+    entrypoint: [sh, -ec, 'read -r POSTGRES_PASSWORD < /run/secrets/bootstrap.password; export POSTGRES_PASSWORD; exec docker-entrypoint.sh postgres']
+    ports: ['127.0.0.1:${PORTFOLIO_PG_PORT:?Operator loopback port}:5432']
+    volumes:
+      - portfolio-pg:/var/lib/postgresql/data
+    secrets:
+      - {source: bootstrap_password, target: bootstrap.password}
+    mem_limit: 256m
+    cpus: 1.0
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -h 127.0.0.1 -U portfolio_bootstrap -d "$${POSTGRES_DB}"']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  migration:
+    image: ${PORTFOLIO_APP_IMAGE:?Verified release required}
+    user: '${PORTFOLIO_RUNTIME_UID:?Nonroot scope owner}:${PORTFOLIO_RUNTIME_GID:?Scope group}'
+    entrypoint: [java, -Xmx128m, -XX:+UseSerialGC, -XX:ActiveProcessorCount=2, -Dloader.main=dev.elpsy.portfolio.operations.CatalogMigration, -cp, /app/portfolio.jar, org.springframework.boot.loader.launch.PropertiesLauncher, /run/secrets/migration.properties]
+    secrets:
+      - {source: migration_properties, target: migration.properties}
+    read_only: true
+    tmpfs: ['/tmp:size=32m,mode=1777']
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 256m
+    profiles: [operations]
+  api:
+    image: ${PORTFOLIO_APP_IMAGE:?Verified release required}
+    user: '${PORTFOLIO_RUNTIME_UID:?Nonroot scope owner}:${PORTFOLIO_RUNTIME_GID:?Scope group}'
+    environment:
+      SPRING_PROFILES_ACTIVE: deploy
+      SPRING_CONFIG_ADDITIONAL_LOCATION: file:/run/secrets/runtime.properties
+    secrets:
+      - {source: runtime_properties, target: runtime.properties}
+    volumes: ['${PORTFOLIO_MEDIA_ROOT:?Own media root}:/data/media']
+    read_only: true
+    tmpfs: ['/tmp:size=32m,mode=1777']
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    cpus: 1.0
+    healthcheck:
+      test: [CMD, java, -Xmx32m, -XX:+UseSerialGC, -Dloader.main=dev.elpsy.portfolio.operations.HealthProbe, -cp, /app/portfolio.jar, org.springframework.boot.loader.launch.PropertiesLauncher]
+      interval: 5s
+      timeout: 8s
+      retries: 12
+      start_period: 25s
+    depends_on:
+      postgres: {condition: service_healthy}
+  gateway:
+    image: ${PORTFOLIO_GATEWAY_IMAGE:?Verified release required}
+    ports: ['127.0.0.1:${PORTFOLIO_GATEWAY_PORT:?Own gateway port}:8080']
+    read_only: true
+    tmpfs: ['/tmp:size=32m,mode=1777']
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 128m
+    cpus: 0.5
+    healthcheck:
+      test: [CMD, wget, -Y, 'off', -q, -O, /dev/null, http://127.0.0.1:8080/healthz]
+      interval: 5s
+      timeout: 3s
+      retries: 6
+    depends_on:
+      api: {condition: service_healthy}
+volumes:
+  portfolio-pg:
+secrets:
+  bootstrap_password: {file: '${PORTFOLIO_DEPLOY_DIRECTORY}/bootstrap.password'}
+  migration_properties: {file: '${PORTFOLIO_DEPLOY_DIRECTORY}/migration.properties'}
+  runtime_properties: {file: '${PORTFOLIO_DEPLOY_DIRECTORY}/runtime.properties'}

@@ -1,0 +1,13 @@
+{
+  "project": "portfolio",
+  "repository": "developer-portfolio",
+  "accepted_main": "2d35ad6452d5200f51c6d239c2d2edb5feef0201",
+  "accepted_ci": 39041571393,
+  "source_paths": [
+    "backend",
+    "src",
+    "public",
+    "infra",
+    "package-lock.json"
+  ]
+}

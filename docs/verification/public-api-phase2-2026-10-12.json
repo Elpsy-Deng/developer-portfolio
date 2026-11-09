@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-12",
+  "baselineCommit": "b4cc8af79431fdea3804325b1c822cf89d577c6a",
+  "milestone": "Phase2 public catalog API and Vue integration",
+  "backend": {
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "testTransport": "real HTTP/random loopback Spring Boot server",
+    "package": "passed",
+    "java": 21,
+    "springBoot": "3.5.16",
+    "reportSha256": "7d3351b3b4dfe800800b9414bd0dfc728afb497fa2208dff1dbc96c7ca023dea",
+    "jarSha256": "ad54e3750c66b01dec963f64067558c22a77f5d4199d8e287de2ebecd724f529"
+  },
+  "frontend": {
+    "vueTsc": true,
+    "productionBuild": true,
+    "node": "24.19.0"
+  },
+  "browser": {
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "retries": 0,
+    "transport": "final package JAR + Vite production preview + Chromium151",
+    "negativeCases": "explicit route stubs for503/incomplete/delayed responses, not real service outage",
+    "manualDesktopMobileReview": true,
+    "reportSha256": "0e7b3268f1b603ece8051dbc1c262b72bb151f280f9c20af07db6ea384dd3478"
+  },
+  "catalog": {
+    "source": "backend/src/main/resources/catalog/projects.json",
+    "projects": 5,
+    "featured": 4,
+    "categories": 3,
+    "sourceAndPackagedBytesEqual": true,
+    "sha256": "f54006009be63b36c3011691d1eb632a13ff38c4b3c94602481a0d672d1641d2",
+    "fourSourceProjectRecordsUnchanged": true,
+    "database": false,
+    "frontendStaticFallback": false
+  },
+  "artifacts": {
+    "dist/favicon.svg": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a",
+    "dist/index.html": "f0b79586896e9d1ccdeeed7b8cde2637d0c3ded4082f01dc95d332de79808914",
+    "dist/assets/index-D2GhWlQV.css": "07ca6de8a5538d118fd8942cadc791e2ad07b8a1ea091751dc93e610ff82ea31",
+    "dist/assets/AboutView-B8XOuEDn.js": "43e25dbfc84907c6ad8eaabbb477fb3d2e8574fcce425fea288e722e00851d8b",
+    "dist/assets/profile-CIieAcHU.js": "42bd832a310c8ce570a61a8d4243d34cb8cd613ee3fddd9ae37378fcc9275309",
+    "dist/assets/HomeView-D-OZoslf.js": "cd2c94dc5f36a5eab966765439c507ded8f3c06016f825ae852cf44742c8670d",
+    "dist/assets/ProjectDetailView-CU8syE1R.js": "2485150860161e31fbfe1e021c47b9f8f23322d7e8b892e2d78cccff84d43aac",
+    "dist/assets/ProjectCard-B-CzzQ9R.js": "5e5e79ab21edaa5d46eb6df6d9f4f46f19d47f13aa907c15b32b6a5dafaec400",
+    "dist/assets/index-dn9cqxbV.js": "46c3c2168b1795332cc2f30acba46c244bde0866fe9d03e5d7d40484ea4c5a21",
+    "dist/assets/SkillBadge-DPkGy6bB.js": "5c7180075b310a5a34ea8fef55bf42a87fc8fd3dd8dc4115b0cfe98b0780392f",
+    "dist/assets/ProjectsView-DLCdpTrH.js": "490b43fb622dc2e68cf93d2c37609fd308d185a43a1587f59202916e6a168806",
+    "dist/assets/ProjectStatusBadge-BXtXTWBT.js": "ee8ebb32e819eaf17918f734291fd6c2c8f444dd98dfd641ebaa2b9099abc7f6",
+    "dist/assets/NotFoundView-BZat__75.js": "2042e29178f997d8d8cc3f7edc7a06a07dff9aaeace36589d6d024418be9b116",
+    "dist/assets/PageSection-BH5_3uQe.js": "c30ac76901a3a7503191eedccf1b124e3f81687589b729343c0b6456387b9399",
+    "dist/projects/e-commerce-platform/storefront-mobile.jpg": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08",
+    "dist/projects/e-commerce-platform/order-confirmation.jpg": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35",
+    "dist/projects/e-commerce-platform/storefront-desktop.jpg": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec",
+    "dist/projects/ai-knowledge-assistant/04-document-library.png": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-mobile.png": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75",
+    "dist/projects/ai-knowledge-assistant/06-mobile.png": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1",
+    "dist/projects/ai-knowledge-assistant/01-workspace.png": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4",
+    "dist/projects/ai-knowledge-assistant/03-insufficient-evidence.png": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1",
+    "dist/projects/ai-knowledge-assistant/05-untrusted-document.png": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f",
+    "dist/projects/ai-knowledge-assistant/02-answer-sources.png": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-desktop.png": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174"
+  },
+  "preservedFailures": [
+    {
+      "stage": "backend-package-1",
+      "reason": "existing JDK bundled CA did not trust session proxy; solved with configured system Java trust store, no TLS bypass"
+    },
+    {
+      "stage": "browser-1",
+      "passed": 12,
+      "failed": 1,
+      "reason": "test expected query API phrase; actual approved content said search API; corrected exact expected phrase and strengthened slow-response completion check"
+    }
+  ],
+  "cleanup": {
+    "api19186Stopped": true,
+    "preview15186Stopped": true,
+    "otherProjectServicesUnchanged": true
+  },
+  "notImplemented": [
+    "PostgreSQL/Flyway",
+    "authentication/admin writes",
+    "Docker/gateway/HTTPS deployment",
+    "live model/App/source-project revalidation"
+  ]
+}

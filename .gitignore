@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.log
+.idea/
+.vscode/
+work/
+backend/target/
+__pycache__/
+*.pyc

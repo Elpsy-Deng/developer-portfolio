@@ -1,0 +1,37 @@
+name: Portfolio public reader build
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package*.json'
+      - '*.config.ts'
+      - 'tsconfig*.json'
+      - '.github/workflows/portfolio-public-reader.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: portfolio-public-reader-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-public-reader:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - run: npm ci
+      - name: Typecheck and build the opt-in public reader
+        env:
+          VITE_PUBLIC_SHOWCASE: 'true'
+        run: npm run build
+      - name: Build the original Nginx gateway image with public-reader assets
+        run: docker build --file infra/gateway.Dockerfile --tag portfolio-public-reader:verification .
+      # The existing Portfolio CI separately exercises the default private build,
+      # full backend, roles, containers, browser, failure rollback and TLS fixture.
+      # No artifact publication, registry write, deployment or public ingress.

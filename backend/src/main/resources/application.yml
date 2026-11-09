@@ -1,0 +1,67 @@
+server:
+  forward-headers-strategy: none
+  tomcat:
+    max-http-form-post-size: 8KB
+    max-parameter-count: 16
+  address: ${PORTFOLIO_BIND:127.0.0.1}
+  port: ${PORTFOLIO_PORT:19186}
+  servlet:
+    session:
+      timeout: 30m
+  error:
+    include-message: never
+    include-stacktrace: never
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+      location: ${PORTFOLIO_MEDIA_ROOT}/incoming
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  application:
+    name: developer-portfolio
+  datasource:
+    url: ${PORTFOLIO_DB_URL}
+    username: ${PORTFOLIO_DB_USER}
+    password: ${PORTFOLIO_DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 4
+      connection-timeout: 2000
+      validation-timeout: 1000
+      data-source-properties:
+        connectTimeout: 2
+        socketTimeout: 3
+  flyway:
+    url: ${PORTFOLIO_DB_URL}
+    user: ${PORTFOLIO_MIGRATION_USER:}
+    password: ${PORTFOLIO_MIGRATION_PASSWORD:}
+    baseline-on-migrate: false
+    clean-disabled: true
+
+portfolio:
+  auth:
+    username: ${PORTFOLIO_AUTH_USER}
+    password: ${PORTFOLIO_AUTH_PASSWORD}
+    cookie-secure: ${PORTFOLIO_COOKIE_SECURE:true}
+    absolute-seconds: ${PORTFOLIO_AUTH_ABSOLUTE_SECONDS:28800}
+    login-window-seconds: ${PORTFOLIO_LOGIN_WINDOW_SECONDS:300}
+    login-account-limit: ${PORTFOLIO_LOGIN_ACCOUNT_LIMIT:30}
+    login-peer-limit: ${PORTFOLIO_LOGIN_PEER_LIMIT:60}
+    login-global-limit: ${PORTFOLIO_LOGIN_GLOBAL_LIMIT:120}
+    change-account-limit: ${PORTFOLIO_CHANGE_ACCOUNT_LIMIT:5}
+    change-peer-limit: ${PORTFOLIO_CHANGE_PEER_LIMIT:20}
+    change-global-limit: ${PORTFOLIO_CHANGE_GLOBAL_LIMIT:40}
+    login-max-buckets: ${PORTFOLIO_LOGIN_MAX_BUCKETS:4096}
+  credentials:
+    username: ${PORTFOLIO_CREDENTIALS_USER}
+    password: ${PORTFOLIO_CREDENTIALS_PASSWORD}
+  identity:
+    username: ${PORTFOLIO_IDENTITY_USER}
+    password: ${PORTFOLIO_IDENTITY_PASSWORD}
+  writer:
+    username: ${PORTFOLIO_WRITER_USER}
+    password: ${PORTFOLIO_WRITER_PASSWORD}
+  media:
+    root: ${PORTFOLIO_MEDIA_ROOT}

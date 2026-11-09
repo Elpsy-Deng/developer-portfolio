@@ -1,0 +1,10 @@
+**
+!infra/
+!infra/app.Dockerfile
+!infra/gateway.Dockerfile
+!infra/nginx.conf
+!backend/
+!backend/target/
+!backend/target/developer-portfolio-0.2.0.jar
+!dist/
+!dist/**

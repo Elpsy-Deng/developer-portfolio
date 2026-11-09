@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-12",
+  "baselineCommit": "86aab848cb91dee457cf592a0005d652abbc7913",
+  "milestone": "Phase3 dedicated PostgreSQL persistence",
+  "backend": {
+    "goal": "clean package",
+    "tests": 19,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "transport": "real PostgreSQL17 + HTTP random loopback port",
+    "xmlSha256": "f8523df03660f0f032324f2216ba3ce3221a3310ed85c02104e6d9c14a8a20f6",
+    "jarSha256": "74849090eadf632a3fe19a2ff0d05a05e3b17d9320e49c37ade791586224d33c",
+    "runtimeReaderWriteDenied": true,
+    "migrationOwnerSeparate": true,
+    "testModeRejectsNonTestDatabaseBeforeMigration": true
+  },
+  "frontend": {
+    "typecheck": true,
+    "productionBuild": true,
+    "browserPassed": 13,
+    "browserRetries": 0,
+    "mobileWidths": [
+      320,
+      390
+    ],
+    "manualMobileScreenshotViewed": true
+  },
+  "runtime": {
+    "passed": 10,
+    "checks": [
+      "fresh V1/V2 and normalized seed",
+      "real public HTTP contracts",
+      "API reads changed PostgreSQL rather than packaged JSON",
+      "API restart preserves all table rows and versions without reseed",
+      "real PG outage gives503 health",
+      "real PG outage gives503 catalog without JSON fallback",
+      "same-volume PG restart recovers original durable data",
+      "only own temporary probe restored; seed fingerprint unchanged",
+      "production browser13 with real PostgreSQL API",
+      "browser/API startup made no changes to domain or history"
+    ],
+    "baseline": {
+      "category": {
+        "rows": 3,
+        "sha256": "930e91b9b18e7996ed08707261d845d449c16cf9494ee9e726a5aff9e80f6ce0"
+      },
+      "project": {
+        "rows": 5,
+        "sha256": "6dddce8d05f63254678e0217241e64abf940b1074b49b116b8677a0f05c97dcc"
+      },
+      "technology": {
+        "rows": 32,
+        "sha256": "edafd1dd14edc127a721ba54a02ad767c3a6aa6c53626fe9e3584169357469a1"
+      },
+      "project_technology": {
+        "rows": 48,
+        "sha256": "49adc9370115e21e1adf095f6a00def8319bf60187e9f69250e7ed945763d79e"
+      },
+      "project_media": {
+        "rows": 7,
+        "sha256": "e7753affe41fcc91706518c7302cee37a2c932720f6b94d7ea8f594296e02edc"
+      },
+      "project_evidence": {
+        "rows": 14,
+        "sha256": "4bcf49688e7d04b2cb82c908a220715fd35276d26299e70f97e781902cd94e29"
+      },
+      "flyway_schema_history": {
+        "rows": 2,
+        "sha256": "2be8c80edd9826ffdd0baa737bede4ad0868cb30de4c56e51acde53d9f5ec501"
+      }
+    },
+    "actualPgTcpStopAndSameVolumeStart": true,
+    "apiRestartPreservesRowsAndVersions": true,
+    "noReseed": true,
+    "databaseFailuresHttp503": true,
+    "noJsonFallback": true,
+    "jarUnchangedDuringRun": true,
+    "resultSha256": "c50995942cea49d1468a23a3625ce6a14ebe6509ba1370387c6c3c7f962f75b1",
+    "browserReportSha256": "292a2dabdf31e1156cb5274f58cf6cb9e6629527be0de4db14684a8cae0a9fa1",
+    "browserNegativeCases": "503/incomplete/delayed UI are explicit route stubs; real PG outage separately proven"
+  },
+  "migrations": {
+    "V1__portfolio_catalog.sql": "2d2512fac1cd8392728202840a12f98c5dbdca1b61da11842cfe87c60f655a6a",
+    "V2__initial_catalog.sql": "b61bb2dabab697b01de4aefb78ca4c24010635056b6e2022ba19ededc3331a0e"
+  },
+  "legacyJsonAbsentFromJar": true,
+  "pgImage": "postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+  "artifacts": {
+    "dist/favicon.svg": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a",
+    "dist/index.html": "f0b79586896e9d1ccdeeed7b8cde2637d0c3ded4082f01dc95d332de79808914",
+    "dist/assets/index-D2GhWlQV.css": "07ca6de8a5538d118fd8942cadc791e2ad07b8a1ea091751dc93e610ff82ea31",
+    "dist/assets/AboutView-B8XOuEDn.js": "43e25dbfc84907c6ad8eaabbb477fb3d2e8574fcce425fea288e722e00851d8b",
+    "dist/assets/profile-CIieAcHU.js": "42bd832a310c8ce570a61a8d4243d34cb8cd613ee3fddd9ae37378fcc9275309",
+    "dist/assets/HomeView-D-OZoslf.js": "cd2c94dc5f36a5eab966765439c507ded8f3c06016f825ae852cf44742c8670d",
+    "dist/assets/ProjectDetailView-CU8syE1R.js": "2485150860161e31fbfe1e021c47b9f8f23322d7e8b892e2d78cccff84d43aac",
+    "dist/assets/ProjectCard-B-CzzQ9R.js": "5e5e79ab21edaa5d46eb6df6d9f4f46f19d47f13aa907c15b32b6a5dafaec400",
+    "dist/assets/index-dn9cqxbV.js": "46c3c2168b1795332cc2f30acba46c244bde0866fe9d03e5d7d40484ea4c5a21",
+    "dist/assets/SkillBadge-DPkGy6bB.js": "5c7180075b310a5a34ea8fef55bf42a87fc8fd3dd8dc4115b0cfe98b0780392f",
+    "dist/assets/ProjectsView-DLCdpTrH.js": "490b43fb622dc2e68cf93d2c37609fd308d185a43a1587f59202916e6a168806",
+    "dist/assets/ProjectStatusBadge-BXtXTWBT.js": "ee8ebb32e819eaf17918f734291fd6c2c8f444dd98dfd641ebaa2b9099abc7f6",
+    "dist/assets/NotFoundView-BZat__75.js": "2042e29178f997d8d8cc3f7edc7a06a07dff9aaeace36589d6d024418be9b116",
+    "dist/assets/PageSection-BH5_3uQe.js": "c30ac76901a3a7503191eedccf1b124e3f81687589b729343c0b6456387b9399",
+    "dist/projects/e-commerce-platform/storefront-mobile.jpg": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08",
+    "dist/projects/e-commerce-platform/order-confirmation.jpg": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35",
+    "dist/projects/e-commerce-platform/storefront-desktop.jpg": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec",
+    "dist/projects/ai-knowledge-assistant/04-document-library.png": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-mobile.png": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75",
+    "dist/projects/ai-knowledge-assistant/06-mobile.png": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1",
+    "dist/projects/ai-knowledge-assistant/01-workspace.png": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4",
+    "dist/projects/ai-knowledge-assistant/03-insufficient-evidence.png": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1",
+    "dist/projects/ai-knowledge-assistant/05-untrusted-document.png": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f",
+    "dist/projects/ai-knowledge-assistant/02-answer-sources.png": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-desktop.png": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174"
+  },
+  "cleanup": {
+    "work/phase3-tests-20261012": {
+      "containers": 0,
+      "volumes": 0,
+      "networks": 0
+    },
+    "work/phase3-tests-2": {
+      "containers": 0,
+      "volumes": 0,
+      "networks": 0
+    },
+    "work/phase3-tests-clean": {
+      "containers": 0,
+      "volumes": 0,
+      "networks": 0
+    },
+    "work/phase3-runtime-1/database": {
+      "containers": 0,
+      "volumes": 0,
+      "networks": 0
+    },
+    "work/phase3-runtime-final/database": {
+      "containers": 0,
+      "volumes": 0,
+      "networks": 0
+    },
+    "work/phase3-runtime-clean/database": {
+      "containers": 0,
+      "volumes": 0,
+      "networks": 0
+    }
+  },
+  "preservedHistory": [
+    "helper argparse init failed before any resources; corrected explicit command separator",
+    "first package19 + runtime10/browser13 passed",
+    "test-mode guard added, then new package19 + runtime10/browser13 passed",
+    "incremental build contained unused previous JSON; preserved XML, clean package19 removed it, final runtime10/browser13 passed"
+  ],
+  "notImplemented": [
+    "admin/auth/RBAC/write API",
+    "media upload/object storage",
+    "application Docker/gateway/TLS deployment",
+    "backup/PITR/HA",
+    "source-project/model/App revalidation"
+  ]
+}

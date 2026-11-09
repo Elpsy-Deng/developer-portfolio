@@ -1,0 +1,333 @@
+{
+  "milestone": "Phase4C verified images / versioned media / safe reclamation",
+  "date": "2026-10-12",
+  "timezone": "Asia/Taipei",
+  "baselineCommit": "8a893b878832a76496332fa448a6b2c4c3ebe8c2",
+  "backend": {
+    "cleanPackage": "PASS",
+    "database": "real PostgreSQL17.11",
+    "http": "real random loopback",
+    "suites": [
+      {
+        "name": "dev.elpsy.portfolio.AdminAuthIntegrationTest",
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "d62d9f8c917f95bab182a4676624f118bbd7747254a45530cef349dce6975a68"
+      },
+      {
+        "name": "dev.elpsy.portfolio.AdminProjectIntegrationTest",
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "1443e85562f5d64f75f2823d515cf47dd5d4ac88f822afac886e3cb6b1bedb8e"
+      },
+      {
+        "name": "dev.elpsy.portfolio.MediaIntegrationTest",
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "b24659cef9acca051fcf491345443958633e51d0a9a70f081631e51641acc1b7"
+      },
+      {
+        "name": "dev.elpsy.portfolio.ProjectApiIntegrationTest",
+        "tests": 20,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "3a9476daa8211c6a2aa9bbe64e4babf79f59a74b4d1c30b186c3bb025ed8e801"
+      }
+    ]
+  },
+  "frontend": {
+    "typecheckAndProductionBuild": "PASS",
+    "logSha256": "42b685c78c9d3b9effcf58c197d9c2e66f143e2f55a911c440d234c28113eab1"
+  },
+  "finalRuntimeExitCode": 0,
+  "runtime": {
+    "outcome": "PASS",
+    "checks": [
+      "default session cookie is Secure/HttpOnly/Strict and scoped",
+      "provisioned PBKDF2 account logs in and rotates session",
+      "real admin overview and security authorization",
+      "fresh V1/V2/V3/V4/V5 and normalized seed",
+      "real public HTTP contracts",
+      "real admin creates draft and public404",
+      "real PNG upload increments aggregate version and is private while draft",
+      "real published write and transactional audit",
+      "real stale expectedVersion409 has no duplicate audit",
+      "real published image serves verified canonical bytes",
+      "API reads changed PostgreSQL rather than packaged JSON",
+      "JAR restart preserves session and never resets accounts",
+      "JAR restart preserves CRUD version and audit",
+      "JAR restart preserves physical image and media metadata",
+      "API restart preserves all table rows and versions without reseed",
+      "real PG outage gives503 health",
+      "real PG outage gives503 catalog without JSON fallback",
+      "real PG outage does not serve image by bypassing publication check",
+      "real PG outage gives503 auth without authenticated fallback",
+      "same-volume PG restart recovers original durable data",
+      "same-volume PG restart preserves login session",
+      "PG restart preserves written project and audit",
+      "PG restart restores identical canonical image bytes",
+      "real delete keeps prior snapshots and append-only audit",
+      "deleted project revokes public image immediately",
+      "durable retirement queue reclaims physical file without deleting audit",
+      "real logout revokes persisted session and cookie replay",
+      "only own temporary probe restored; seed fingerprint unchanged",
+      "production browser29 with real PostgreSQL catalog/auth/CRUD/images",
+      "browser/API startup made no changes to domain or history",
+      "browser never resets account hashes or roles"
+    ],
+    "transport": "packaged JAR / own PostgreSQL17 / production dist",
+    "automaticRetries": 0,
+    "artifactSha256": "9809b226363d8e27ec805d0a808bbe369716309dc32b212ddf05a94ef657f40e",
+    "baseline": {
+      "category": {
+        "rows": 3,
+        "sha256": "930e91b9b18e7996ed08707261d845d449c16cf9494ee9e726a5aff9e80f6ce0"
+      },
+      "project": {
+        "rows": 5,
+        "sha256": "1fe40fc2ea9c7df4dfe19cab9666d11714a34c39fd24c8472e2447f6e8daf38a"
+      },
+      "technology": {
+        "rows": 32,
+        "sha256": "edafd1dd14edc127a721ba54a02ad767c3a6aa6c53626fe9e3584169357469a1"
+      },
+      "project_technology": {
+        "rows": 48,
+        "sha256": "49adc9370115e21e1adf095f6a00def8319bf60187e9f69250e7ed945763d79e"
+      },
+      "project_media": {
+        "rows": 7,
+        "sha256": "ef236fb32a134c2704b6143e6b726b2f104f4ffebfedd447a8767d0dfd0297f1"
+      },
+      "project_evidence": {
+        "rows": 14,
+        "sha256": "4bcf49688e7d04b2cb82c908a220715fd35276d26299e70f97e781902cd94e29"
+      },
+      "flyway_schema_history": {
+        "rows": 5,
+        "sha256": "c89d46d58d6d3d99a520e7b477978f194c3288568f57b9f1ca1e2f9110ac4fb9"
+      }
+    },
+    "browser": {
+      "startTime": "2026-10-12T11:19:26.632Z",
+      "duration": 107526.974,
+      "expected": 29,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "passed": 31,
+    "cleanup": {
+      "ownProcessesStopped": true
+    }
+  },
+  "migrations": {
+    "V1__portfolio_catalog.sql": "2d2512fac1cd8392728202840a12f98c5dbdca1b61da11842cfe87c60f655a6a",
+    "V2__initial_catalog.sql": "b61bb2dabab697b01de4aefb78ca4c24010635056b6e2022ba19ededc3331a0e",
+    "V3__admin_sessions.sql": "403c609fd728e8d6b4b2eaf76234722f3b401b1ed6a7b54354276ed1ff173463",
+    "V4__project_management.sql": "ab61fe90b1d44d8d3ba41a10e2f921f0cecb32d9eae32bb050fec542f8aaef21",
+    "V5__managed_images.sql": "0e34042fcd93870d728d05e1022d947d90144236fa110cc4f905446941129b83"
+  },
+  "publishedV1ThroughV4Unchanged": true,
+  "publicStaticImagesUnchanged": {
+    "public/favicon.svg": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a",
+    "public/projects/ai-knowledge-assistant/01-workspace.png": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4",
+    "public/projects/ai-knowledge-assistant/02-answer-sources.png": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c",
+    "public/projects/ai-knowledge-assistant/03-insufficient-evidence.png": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1",
+    "public/projects/ai-knowledge-assistant/04-document-library.png": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf",
+    "public/projects/ai-knowledge-assistant/05-untrusted-document.png": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f",
+    "public/projects/ai-knowledge-assistant/06-mobile.png": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1",
+    "public/projects/ai-knowledge-assistant/milestone4-rag-desktop.png": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174",
+    "public/projects/ai-knowledge-assistant/milestone4-rag-mobile.png": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75",
+    "public/projects/e-commerce-platform/order-confirmation.jpg": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35",
+    "public/projects/e-commerce-platform/storefront-desktop.jpg": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec",
+    "public/projects/e-commerce-platform/storefront-mobile.jpg": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08"
+  },
+  "storage": "Free dedicated local ImageStore adapter; no external object service",
+  "guarantees": [
+    "Actual PNG/JPEG decode, dimensions/pixels and canonical re-encoding; malicious trailing data removed",
+    "Multipart5MiB413, fake SVG/PNG MIME/dimension rejects; no client-controlled path",
+    "Published/current reference checks before bytes, draft private, SHA256 and byte integrity check, no-store/nosniff",
+    "Aggregate expectedVersion and audit same transaction; IO/audit failures roll back metadata and new bytes",
+    "Cover replacement and project/media removal persist retirement before file reclamation",
+    "Retirement retry/idempotence,24h unknown-object/temp grace, live references preserved, symlink rejection",
+    "JAR/PG restart preserves exact bytes and metadata; real PG outage does not bypass publication lookup"
+  ],
+  "negativeEvidence": "Browser storage503 is explicit route stub; real IO/missing/hash/symlink failures and permission rollback are PG/HTTP integration tests; real PG stop/start is runtime",
+  "failuresPreserved": [
+    "Initial44 regression had1 failure because upgrade assertion expected old status wording; aligned with V5 image milestone then56 pass",
+    "Runtime initially depended on a workspace fixture; replaced with byte-identical self-generated synthetic fixture and reran fixed JAR/dist successfully"
+  ],
+  "cleanup": {
+    "scopes": [
+      {
+        "scope": "work/phase4c-test-01",
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0,
+        "objects": 0,
+        "incoming": 0
+      },
+      {
+        "scope": "work/phase4c-runtime-01/database",
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0,
+        "objects": 0,
+        "incoming": 0
+      },
+      {
+        "scope": "work/phase4c-runtime-final/database",
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0,
+        "objects": 0,
+        "incoming": 0
+      }
+    ],
+    "ports": {
+      "25486": "no listener / connection refused",
+      "25487": "no listener / connection refused",
+      "19186": "no listener / connection refused",
+      "15186": "no listener / connection refused"
+    },
+    "ownProcessesStopped": true
+  },
+  "limits": [
+    "No SeaweedFS/S3, formalHTTPS/account governance/login rate limit or coordinated backup restore",
+    "Only PNG/JPEG; JPEG re-encoded,EXIF stripped, no orientation correction",
+    "Legacy static files remain public and are not deleted by media reclamation",
+    "No global storage quota/GC alert or failure dashboard; scheduled failures retry and manual endpoint reports503",
+    "Assets/audit retain metadata; retired image history does not retain bytes"
+  ],
+  "privateEvidence": "Credentials/raw XML/logs/cookies/traces/screenshots remain ignored work; synthetic fixture only",
+  "sourceSha256": {
+    "backend/src/main/java/dev/elpsy/portfolio/PortfolioApplication.java": "2c2fe5d1639b2707058d34220b15be1c41929b47be13977170ef80d411215bff",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/AdminProjectController.java": "ce580d3c6571343c5a157a20fe488165dcfa5c65efbdb9dbf62634674c07b141",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/AdminProjects.java": "6e994638976296a7ebd11d96939b2444a175e150bc76609ee4354b287f8a1387",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/ImageCatalog.java": "a2132c109affd34080bf42e2ac7903c5bece38e376b67f50a77958ad47742dd5",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/MediaController.java": "b93998243f58074277eda16dbf2a29b67515b01801bb320354f5efd4b01bb8e7",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/MediaMaintenance.java": "c9abda8c16d7267995986023bdf184fc691ca0da14db71da95cf6121a59fcdb4",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/MediaProjects.java": "c8a491be6cecea25d2887f907f77211abbc0d924cb98a98bf5d49dba296d7dcc",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/ProjectContent.java": "e5ff40871ddd434c2a55df831b53447bb8e7418b2f9bc75548e56616ee042a2c",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/WriterDatabase.java": "d8247ca49453589ea774dd14385d970afd8eb3cbe9eb07f7d92bd79602a9108e",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AccountValidityFilter.java": "87ed1ba144e5b006308f7fd29cd30a3262e173cbb64792c4c6dcca517d4496e0",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AdminAccounts.java": "711f29332333e1e486cafd9ea2603647f7b705547ad17e11ef53f52465d5f0cb",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AdminController.java": "9eab5b493038ce1eae2b2945b087253202a654f5eb97ca8b16cd5cc4f3076a69",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AdminIdentity.java": "96c7b3537ee489812ad75f14a1bc89cb862192055d4dddb70af856d8229de70d",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AdminSecurity.java": "90a5d8c93d5eb87f5c7ed273b1c0126ccf33913c18805c85a35059b0e9fd6d4e",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AuthAvailabilityFilter.java": "9c89bdc48a2b9bcd9442bf8344d24f217d0f5d458a3080cba5ba0011939beb49",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AuthDatabase.java": "31bbcbdc4b3832c6704a7c42625b836d1b82a9ddef7f47cf50ccfb2320fafd6e",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AuthResponses.java": "cc4587b52b147d8c66f6c3bcb359166fd4ee3b973c491ffa0a4aab4110caaaf7",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/CatalogDatabaseGuard.java": "d0323597c0632f8ff00c1cb1281d0ad6f6574790e7950a1b484b4f8a040cf38f",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/CatalogErrors.java": "d6aa1d7f5556421dc34daf3e8b4a7022ec3a5c275fa28885118d5ad88148ba4a",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/CatalogProblem.java": "8b86cecd5144691542348bebb088de3179be15e9215cff6557602f9e3735bd13",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/Project.java": "824734e977c54bd35cdf4c1b9ebe5481f59941a5f084985b73f4e2e25a78c5f9",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/ProjectCatalog.java": "b60364a7590a7461d67c43b3814a270ec0973eff102a38088f3aec4c0f8a4114",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/ProjectController.java": "4d1108538dbeb5f537b0fb39f2b48b3058a828bc9ecf007b78b954199e62475f",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/ProjectProjection.java": "cf76c918a6a3e00bcb697564e59218716b0fa810cd9d82f8f86349252f4a4d86",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/ProjectSummary.java": "1da066e0210fd18a215f6fe440dff63912376a74b6810aadf0f815c20fa82024",
+    "backend/src/main/java/dev/elpsy/portfolio/media/ImageController.java": "d1cb209d8fb2c36f0d72f1ea68e182c92dc160863a30a87005a1caf872431e3c",
+    "backend/src/main/java/dev/elpsy/portfolio/media/ImageNormalizer.java": "3cddbfc5de32aca4abd7f8e52745d368f321cec2fca0786e07e140c6876c5f3d",
+    "backend/src/main/java/dev/elpsy/portfolio/media/ImageStorageProblem.java": "44ca7d87dac4ceb026592196ef14c5df1dcebe98849cc568c571adf47d13404c",
+    "backend/src/main/java/dev/elpsy/portfolio/media/ImageStore.java": "7f039b58fc03b4a6c0d8ec0e1ba64bf66567d758d7f4de2145f8fc0d8514da46",
+    "backend/src/main/java/dev/elpsy/portfolio/media/LocalImageStore.java": "e88d75168328c3e668c74571104c39b40316657aba1fc505d44dab6de8fe62ff",
+    "backend/src/main/java/dev/elpsy/portfolio/media/MediaCleanupSchedule.java": "8d600eb090d160dea5f9541722f7546d52a6f1745ba995de5a8d438e0c6da09f",
+    "backend/src/main/resources/application.yml": "c8750587b64798d486a9edd9c6766974695dce3c0d0c6864419f31484ba791e3",
+    "backend/src/main/resources/db/migration/V1__portfolio_catalog.sql": "2d2512fac1cd8392728202840a12f98c5dbdca1b61da11842cfe87c60f655a6a",
+    "backend/src/main/resources/db/migration/V2__initial_catalog.sql": "b61bb2dabab697b01de4aefb78ca4c24010635056b6e2022ba19ededc3331a0e",
+    "backend/src/main/resources/db/migration/V3__admin_sessions.sql": "403c609fd728e8d6b4b2eaf76234722f3b401b1ed6a7b54354276ed1ff173463",
+    "backend/src/main/resources/db/migration/V4__project_management.sql": "ab61fe90b1d44d8d3ba41a10e2f921f0cecb32d9eae32bb050fec542f8aaef21",
+    "backend/src/main/resources/db/migration/V5__managed_images.sql": "0e34042fcd93870d728d05e1022d947d90144236fa110cc4f905446941129b83",
+    "backend/src/test/java/dev/elpsy/portfolio/AdminAuthIntegrationTest.java": "66e48d2130553547d90598c8c5303d74a02bbd453573621d764482ef9a2ce1a1",
+    "backend/src/test/java/dev/elpsy/portfolio/AdminProjectIntegrationTest.java": "27ef7f624ad4842fa3d7221a9215f079aa482cfa6dda3e3f4f7c4f0c45d9a0b0",
+    "backend/src/test/java/dev/elpsy/portfolio/MediaIntegrationTest.java": "b0b7c93335706e4c6b30ffd0caf77b93d1d2e7c8af14a4380b87b1384da058ed",
+    "backend/src/test/java/dev/elpsy/portfolio/ProjectApiIntegrationTest.java": "47368a26e1b01893681ce14b0ea14cadd6a3bcfaa3db6d220a399d5b4b3a18c6",
+    "src/App.vue": "229a4650b5fcd420d30554d6246a84b60247ec018c070f5d6607d6e7a3ef7775",
+    "src/api/admin.ts": "9f185cf0f7c58a23b9686b8926c23f53648bb81bcd10de07d7fbe915e4488d2c",
+    "src/api/adminProjects.ts": "bdf66a591cc739022e4cdf1da213a2fcdbffa146461d9504778596a6a9f4a76e",
+    "src/api/media.ts": "8546dffdfbe825cdb69331cb0875c862850aa0767c8ac93de760e432457786c2",
+    "src/api/projects.ts": "e8721021c9f386b7646ba9e4ad681f8a600cd2ba212b04d0397dc5f6ba7dc911",
+    "src/components/AdminPairList.vue": "ffe2d7317e7c99c35039acf6b1eec243b07d92aa1cbe410cebaba61da162e217",
+    "src/components/AdminTextList.vue": "d13d29abdd160f28cbb5f1fa9a230c00f72cadb07250c57cf815d0ff84525617",
+    "src/components/AppIcon.vue": "c69831ba0fbd556b87999c9d91eaa3010c63a5a97d21d36f34ecb87563adb7f9",
+    "src/components/PageSection.vue": "2e17ef13930ecb0f977a76925ba5a721ae9190aec990f0e266d785dbf27b773f",
+    "src/components/ProjectCard.vue": "65dec6e286b38e3b3035a168d73e45a97917b51643b6e6cdc00f5def6aa0057a",
+    "src/components/ProjectLinks.vue": "4de3128707b5531dd3e34ebe9b09323b9591a34e26ef394fabe42d7ed81b1a28",
+    "src/components/ProjectLoadState.vue": "b22c5f6abb9dd31b1ea4420056bfdb80be4390de12616bf5fae7eca13cb355db",
+    "src/components/ProjectMediaPlaceholder.vue": "3f472bb39880879f175258ffff74cb19e4a8e0babfaede7b4e1e3be04835fde8",
+    "src/components/ProjectScreenshot.vue": "0f3714bff7d1dccfee938f8947b6eafec9f4a062960b9b551cfcf6cfd4608159",
+    "src/components/ProjectStatusBadge.vue": "bdfd110cb0dd2d7c32dcb18ac68d0be7a11da61a949fccfd2ae0bddeabc7da24",
+    "src/components/ProjectVisual.vue": "5792056eb42050b31638220f4012bca795e58d20c1c854be343dec12fb3ff74d",
+    "src/components/SiteFooter.vue": "587a37a4c7cb6cf9c317e6905ce0e45a0e87f2b3b9589525ff319354be34916b",
+    "src/components/SiteNav.vue": "e6176e2cccb50f17bd6f438063cc1240786ec55bbfd927086e455f886363ebb3",
+    "src/components/SkillBadge.vue": "2edc813a8a860ae382afc8283b8eae44758f6c3e0136627ee00fb67e551b063e",
+    "src/composables/useRemote.ts": "6f08815b23e54e7ea20f25e17f4b4447d48431af78280bd37406fc4b8777fd97",
+    "src/data/profile.ts": "df37b0488afc5e9f9fa2bcfd6ae2663c80db0347f5f2393df271dd971820f4fd",
+    "src/main.ts": "b0b111f54fbe63a10ff05ad4770f61d74950d72d5860f8152eb0a7929c4adea0",
+    "src/router/index.ts": "4e615dbc263d9bab8424f8fd5c8a08fbfcec2db7565e5a9db37ebda59ac760c9",
+    "src/styles.css": "37378e3ca5a1e0ca7a181f71cb0bf50bdf8f3eda0e1a573c9feda9946454ee06",
+    "src/types/project.ts": "52a336ace66decca80643649842db1a8628295f7699dfc05e5fe42889a8c7e40",
+    "src/views/AboutView.vue": "cdd0d24c71c679d1ab27a9b01bb93945eb30f05509cff3dfc4934e8e70d7f64e",
+    "src/views/AdminLoginView.vue": "7c11e06ba84581e0fead7c080ff44807b00e6d56777fd20c36a3051961c8b9b8",
+    "src/views/AdminProjectAuditView.vue": "815ad3e92514d125c0e1502fff0af8cad3a52280199330d5f321a1a0b4bd0b2a",
+    "src/views/AdminProjectEditView.vue": "16fd6eb2cbe2c85f1ea75b2359365da27e62c63f369a77eae7da7f57d571bf40",
+    "src/views/AdminProjectMediaView.vue": "ff2ffd70e8bd35dbd6acc49e3006cf20f4f69cbaaef126eb4317954dc264dca9",
+    "src/views/AdminProjectsView.vue": "7c30709a498647c534d8609d49a56ed074188d97d9578737a9cf253821922358",
+    "src/views/AdminView.vue": "0badbb87da2cf14d9b71b4b4f512618acc4fb6aa13102fa705e86bc0841eb51a",
+    "src/views/HomeView.vue": "d0bd8a98d7fcb77d33e61d09770fe39d67dd73900b0a36c7fc0895ac33c428c4",
+    "src/views/NotFoundView.vue": "d8554f2404a157be14a63a6ad7d1070e213f2d40397c94ac668b970683ff1ec3",
+    "src/views/ProjectDetailView.vue": "41003044b6e734eb40fef81b3451667e52a6e1f1500b30622669a585ec8de20f",
+    "src/views/ProjectsView.vue": "a03b1898dfa3077310c18f0a22d4a42ccff0f3bfd09de220490b7af153c81f93",
+    "scripts/portfolio_db.py": "bd628bbdacb54a5b05000cda58ab05fc420bd598d277fe4ca2412301030ad79e",
+    "scripts/run-backend.mjs": "e920743281679edd82a4dcc107a47b66c7c818c190968e80e368b9e0eb745afa",
+    "scripts/run_persistence_runtime.py": "94e0df5a024347764e070a783fe1ec5b5ab14d08c259042ae2e6893a89714437",
+    "tests/admin-projects.spec.ts": "8d08ad1bd5717bc9e4a070a5b8f17864a6d354347f702fbf07bf552ee65a7e75",
+    "tests/admin.spec.ts": "667bab9b9bd4ef973da6652b050ebaade1ef8d9afe5fc6b052a263b0d1986e3b",
+    "tests/media.spec.ts": "febd28ace5728c297dbae7e523f79089eb9becc9513a80d5e24ff94879dfe1ca",
+    "tests/portfolio.spec.ts": "d900a64efe96725d6dcb057d6c501cdba0e9f1a0c293e04a8b0a855235d61583"
+  },
+  "distSha256": {
+    "dist/assets/AboutView-CfYPlL-G.js": "11a5d00bf5af04e1345429b7e083c31a4e543e1866f94432341e0caf53fd8649",
+    "dist/assets/AdminLoginView-D8p4hqR2.js": "3808ec1ebd768d8ff3ab5b3aeee79c7e7a1b69420cfc192b5d04f7ea90d64a3b",
+    "dist/assets/AdminProjectAuditView-D-8QPd5E.js": "3ce8650ce82f1cae5980a0591bc849fb3d399a98bfe63c28b9b91a024cc1bb3f",
+    "dist/assets/AdminProjectEditView-Fx9hisLT.js": "fbf9e254991195dab467ac012bf3e03c48b3de55c60585bda87e635bd96ac0c9",
+    "dist/assets/AdminProjectMediaView-CTDe6xUc.js": "79c2df6d1c8e4b5c6b0bd94a8f5f261f150c7fe03d32af0c1b3012cfa84d9f72",
+    "dist/assets/AdminProjectsView-dEIGU7M4.js": "7f1bdd55f2e38be35bcf77d544ba1ca90cf77331af8a3d2078bea2f6b2df5cae",
+    "dist/assets/AdminView-CWUOB9me.js": "f05fc28b31202e018cf9570d199aec368711ffd049bead563be900167735803a",
+    "dist/assets/HomeView-CulyUElw.js": "a04dd1574f9ee22cec64782e0e6d604ede02ff4b1bf1268430a69660e75b0bbc",
+    "dist/assets/NotFoundView-RKWah_Cb.js": "b1f0b7dee45b6433c3846015a825c82a54e33cac180d1b4ff48dad06e1196179",
+    "dist/assets/PageSection-Dcz2OdKV.js": "2d5c7b4167fa9e23def8cc3f76d1d8f1a0d344151c2ec7b7067bf3c5ea8d1754",
+    "dist/assets/ProjectCard-CKIJL5ax.js": "a9e4bd3f0e4447bd51fd9c7a61e49cb1fe5cc04670f38c1a5df84c20f0930836",
+    "dist/assets/ProjectDetailView-B5EBNyE_.js": "ba660b8765919342a18a988155a8a09825a4ad4cc32988b39d8e2808de95871f",
+    "dist/assets/ProjectStatusBadge-r6OWkzP0.js": "356b6aec3d5de7a299e397320e90c217fd69153a2cb97d25c81ed3ac3ccb1aba",
+    "dist/assets/ProjectsView-rEMHkh5a.js": "72079e3432fbc85ae5d3176ac0f6ed5934ca5d41c155036d58dc023d866f98ca",
+    "dist/assets/SkillBadge-DHMUSJhG.js": "2249286898863807327d301fdab5c3272fb87a6388a9dcc576283f20b641901e",
+    "dist/assets/admin-CmUXAmfG.js": "319a27147f15721bc018d18b0885d792a7525ff51907c5ffd76bfc2751d83b5d",
+    "dist/assets/adminProjects-Bqyacsf_.js": "2214348a9d3b6f805f7077736c261a8d9fe3042d7aeca4d455bd5369da55ae8e",
+    "dist/assets/index-DKtChXb9.css": "499a6f85ab498e0e9492d43438874572e9129270fa32c028538aa938e67b5876",
+    "dist/assets/index-DsC1mCcX.js": "ad5bc826432eac34425d52d3ff66f48566497cc765489898c5b2596269322b77",
+    "dist/assets/profile-CIieAcHU.js": "42bd832a310c8ce570a61a8d4243d34cb8cd613ee3fddd9ae37378fcc9275309",
+    "dist/assets/projects-xJrIsWSf.js": "fa4853a4d1d85d93f81c3d700f4de21b717d4adc0ca0311398abaf273982f3f1",
+    "dist/favicon.svg": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a",
+    "dist/index.html": "abff92e01d9d01e8f5a72414d8f5c0be16e54c7fe485cea04ca6e8b3cf23cab1",
+    "dist/projects/ai-knowledge-assistant/01-workspace.png": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4",
+    "dist/projects/ai-knowledge-assistant/02-answer-sources.png": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c",
+    "dist/projects/ai-knowledge-assistant/03-insufficient-evidence.png": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1",
+    "dist/projects/ai-knowledge-assistant/04-document-library.png": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf",
+    "dist/projects/ai-knowledge-assistant/05-untrusted-document.png": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f",
+    "dist/projects/ai-knowledge-assistant/06-mobile.png": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-desktop.png": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-mobile.png": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75",
+    "dist/projects/e-commerce-platform/order-confirmation.jpg": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35",
+    "dist/projects/e-commerce-platform/storefront-desktop.jpg": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec",
+    "dist/projects/e-commerce-platform/storefront-mobile.jpg": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08"
+  }
+}

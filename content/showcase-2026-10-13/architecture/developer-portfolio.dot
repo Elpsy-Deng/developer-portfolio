@@ -1,0 +1,16 @@
+digraph G {
+graph [rankdir=LR,bgcolor="#f6f8f4",pad="0.4",nodesep="0.45",ranksep="0.65",fontname="Noto Sans CJK TC",size="12,6!",dpi=110,label="developer-portfolio\n架構說明圖 · 固定來源程式整理 · 非產品操作截圖",labelloc=t,fontsize=17];
+node [shape=box,style="rounded,filled",fillcolor="white",color="#3b7759",fontname="Noto Sans CJK TC",fontsize=12,margin="0.18,0.13"];
+edge [color="#6b7e70",fontname="Noto Sans CJK TC",fontsize=10];
+web [label="Nginx / Vue dist\n同源loopback入口"];
+api [label="Java21 / Spring Boot3.5.16\n角色、CSRF、版本、audit"];
+pg [label="PostgreSQL17\ncatalog / Session / quota"];
+media [label="local media adapter\n引用感知bytes"];
+migration [label="one-shot migration\nowner secret、非web"];
+ci [label="GitHub CI\n驗證＋safe summary"];
+web -> api [label="API私有network"];
+api -> pg [label="5組最小runtime角色"];
+api -> media [label="自己的scope root"];
+migration -> pg [label="先migrate，API僅validate"];
+ci -> web [label="只在拋棄scope驗收"];
+}

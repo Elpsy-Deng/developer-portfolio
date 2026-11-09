@@ -1,0 +1,441 @@
+{
+  "milestone": "Phase5D HTTPS gateway and anonymous Session admission",
+  "date": "2026-10-13",
+  "baseline": "d2211e59ae899765e8910624f4e27c2735798dc6",
+  "local": {
+    "backend": {
+      "suites": 11,
+      "tests": 114,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "pythonGuards": {
+      "backup": 7,
+      "ciEvidence": 8,
+      "showcase": 4,
+      "https": 4
+    },
+    "frontendTypecheckAndBuild": "PASS",
+    "standardDockerBuild": "PASS",
+    "failure": "VFS ENOSPC prevented actual local container/TLS acceptance; no local full PASS claim",
+    "attempts": [
+      "phase5d-ci1: actual schema refusal then ENOSPC migration",
+      "phase5d-ci2: compacted owned images, output-directory ENOSPC before runtime result",
+      "phase5d-runtime3: schema refusal then ENOSPC migration; emergency validated direct scope cleanup"
+    ],
+    "cleanupLogEnospcActualDockerFaultInjection": "PASS",
+    "finalOwnResources": {
+      "containers": 0,
+      "volumes": 0,
+      "networks": 0
+    },
+    "backendIsHistoricalPreQueueChange": true,
+    "currentMainAndTestCompile": "PASS",
+    "explicitUiStubChecks": 2,
+    "syntheticTlsTransportFixture": "PASS: real CA/SNI/Strict path Cookie and CSRF form; not Nginx/PG proof"
+  },
+  "hosted": {
+    "status": "SUCCESS",
+    "runId": 38386662847,
+    "url": "https://github.com/Elpsy-Deng/developer-portfolio/actions/runs/38386662847",
+    "jobId": 115260468459,
+    "artifactId": 11806563370,
+    "artifactSizeInBytes": 701,
+    "zipEntries": [
+      "summary.json"
+    ],
+    "defaultOfficialPinnedPg": true,
+    "summary": {
+      "schema": 1,
+      "commit": "576bcf90b053f7aa5aaeaf8537fbe931d195a4a5",
+      "outcome": "PASS",
+      "completedStages": [
+        "python-guards",
+        "backend-package",
+        "frontend-build",
+        "docker-build",
+        "container-browser-acceptance",
+        "verified-https-acceptance"
+      ],
+      "backend": {
+        "suites": 11,
+        "tests": 115,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "deploymentImages": "STANDARD",
+      "runtime": {
+        "checksPassed": 27,
+        "browser": {
+          "expected": 43,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        },
+        "cleanup": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        },
+        "showcase": {
+          "checksPassed": 17,
+          "browser": {
+            "expected": 5,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0
+          }
+        }
+      },
+      "https": {
+        "checksPassed": 30,
+        "certificateVerification": "ENABLED",
+        "cleanup": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        }
+      },
+      "artifacts": {
+        "jarSha256": "ca50067521dfcde650180e462b7b8ea2367253f0e0f36bde8a1d2e5ee42d9745",
+        "distTreeSha256": "a7995c935097d62178f2b21f9e057d3e45db5f6e784ab07b61d3ec6595cbefd9",
+        "migrationCount": 9,
+        "publicAssetCount": 12
+      },
+      "cleanup": "PASS"
+    }
+  },
+  "limits": [
+    "No public DNS/hosting/certificate configured; private verified TLS is not public launch",
+    "Browser regressions use production HTTP gateway; separate HTTPS tests verify CA/SAN and HTTP API",
+    "Two-peer classification is unit-tested; real HTTPS checks one loopback/NAT peer distinct from gateway, not multi-public-client capacity",
+    "No ACME renewal, CDN/external proxy chain, public 80/443 routing or long-running soak"
+  ],
+  "codeCommit": "576bcf90b053f7aa5aaeaf8537fbe931d195a4a5",
+  "failedHosted": [
+    {
+      "runId": 38376256073,
+      "summary": {
+        "schema": 1,
+        "commit": "fc13ad4a39e43e5ce79c7b8b027bdfe253c12929",
+        "outcome": "FAIL",
+        "completedStages": [
+          "python-guards",
+          "backend-package",
+          "frontend-build",
+          "docker-build"
+        ],
+        "backend": {
+          "suites": 11,
+          "tests": 114,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "deploymentImages": "STANDARD",
+        "failedStage": "container-browser-acceptance",
+        "errorType": "RuntimeError",
+        "cleanup": "PASS"
+      }
+    },
+    {
+      "runId": 38378481329,
+      "summary": {
+        "schema": 1,
+        "commit": "ac52c3f78675e65feb5c7740a4d2d32317d2c2a2",
+        "outcome": "FAIL",
+        "completedStages": [
+          "python-guards",
+          "backend-package",
+          "frontend-build",
+          "docker-build"
+        ],
+        "backend": {
+          "suites": 11,
+          "tests": 114,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "deploymentImages": "STANDARD",
+        "failedStage": "container-browser-acceptance",
+        "errorType": "RuntimeError",
+        "failureProgress": {
+          "containerChecksCompleted": 10,
+          "browser": {
+            "expected": 42,
+            "unexpected": 1,
+            "skipped": 0,
+            "flaky": 0,
+            "failedSourceLines": [
+              45
+            ]
+          }
+        },
+        "cleanup": "PASS"
+      }
+    },
+    {
+      "runId": 38380032374,
+      "summary": {
+        "schema": 1,
+        "commit": "766be55f568186e41b7072febe166eae374c7ad1",
+        "outcome": "FAIL",
+        "completedStages": [
+          "python-guards",
+          "backend-package",
+          "frontend-build",
+          "docker-build",
+          "container-browser-acceptance"
+        ],
+        "backend": {
+          "suites": 11,
+          "tests": 114,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "deploymentImages": "STANDARD",
+        "runtime": {
+          "checksPassed": 27,
+          "browser": {
+            "expected": 43,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0
+          },
+          "cleanup": {
+            "containers": 0,
+            "volumes": 0,
+            "networks": 0
+          },
+          "showcase": {
+            "checksPassed": 17,
+            "browser": {
+              "expected": 5,
+              "unexpected": 0,
+              "skipped": 0,
+              "flaky": 0
+            }
+          }
+        },
+        "failedStage": "verified-https-acceptance",
+        "errorType": "RuntimeError",
+        "failureProgress": {
+          "containerChecksCompleted": 27,
+          "showcaseChecksCompleted": 17,
+          "httpsChecksCompleted": 11,
+          "browser": {
+            "expected": 43,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0,
+            "failedSourceLines": [],
+            "failedAssertionLines": []
+          },
+          "showcaseBrowser": {
+            "expected": 5,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0,
+            "failedSourceLines": [],
+            "failedAssertionLines": []
+          }
+        },
+        "cleanup": "PASS"
+      }
+    },
+    {
+      "runId": 38382355635,
+      "summary": {
+        "schema": 1,
+        "commit": "144acddefec8981cc1cd3e5ff2f68c723d8e3f8b",
+        "outcome": "FAIL",
+        "completedStages": [
+          "python-guards",
+          "backend-package",
+          "frontend-build",
+          "docker-build"
+        ],
+        "backend": {
+          "suites": 11,
+          "tests": 114,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "deploymentImages": "STANDARD",
+        "failedStage": "container-browser-acceptance",
+        "errorType": "RuntimeError",
+        "failureProgress": {
+          "containerChecksCompleted": 10,
+          "browser": {
+            "expected": 42,
+            "unexpected": 1,
+            "skipped": 0,
+            "flaky": 0,
+            "failedSourceLines": [
+              23
+            ],
+            "failedAssertionLines": [
+              14
+            ]
+          }
+        },
+        "cleanup": "PASS"
+      }
+    },
+    {
+      "runId": 38384139862,
+      "summary": {
+        "schema": 1,
+        "commit": "9fc0724331f33852eaf427dffcce9f55166566b6",
+        "outcome": "FAIL",
+        "completedStages": [
+          "python-guards",
+          "backend-package",
+          "frontend-build",
+          "docker-build",
+          "container-browser-acceptance"
+        ],
+        "backend": {
+          "suites": 11,
+          "tests": 115,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "deploymentImages": "STANDARD",
+        "runtime": {
+          "checksPassed": 27,
+          "browser": {
+            "expected": 43,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0
+          },
+          "cleanup": {
+            "containers": 0,
+            "volumes": 0,
+            "networks": 0
+          },
+          "showcase": {
+            "checksPassed": 17,
+            "browser": {
+              "expected": 5,
+              "unexpected": 0,
+              "skipped": 0,
+              "flaky": 0
+            }
+          }
+        },
+        "failedStage": "verified-https-acceptance",
+        "errorType": "RuntimeError",
+        "failureProgress": {
+          "containerChecksCompleted": 27,
+          "showcaseChecksCompleted": 17,
+          "httpsChecksCompleted": 11,
+          "failureOperation": 3,
+          "lastHttpStatus": 404,
+          "browser": {
+            "expected": 43,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0,
+            "failedSourceLines": [],
+            "failedAssertionLines": [],
+            "failedSessionHttpStatuses": []
+          },
+          "showcaseBrowser": {
+            "expected": 5,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0,
+            "failedSourceLines": [],
+            "failedAssertionLines": [],
+            "failedSessionHttpStatuses": []
+          }
+        },
+        "cleanup": "PASS"
+      }
+    },
+    {
+      "runId": 38385333202,
+      "summary": {
+        "schema": 1,
+        "commit": "dbda60091568bd306241dad03da3d1dce2872898",
+        "outcome": "FAIL",
+        "completedStages": [
+          "python-guards",
+          "backend-package",
+          "frontend-build",
+          "docker-build",
+          "container-browser-acceptance"
+        ],
+        "backend": {
+          "suites": 11,
+          "tests": 115,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "deploymentImages": "STANDARD",
+        "runtime": {
+          "checksPassed": 27,
+          "browser": {
+            "expected": 43,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0
+          },
+          "cleanup": {
+            "containers": 0,
+            "volumes": 0,
+            "networks": 0
+          },
+          "showcase": {
+            "checksPassed": 17,
+            "browser": {
+              "expected": 5,
+              "unexpected": 0,
+              "skipped": 0,
+              "flaky": 0
+            }
+          }
+        },
+        "failedStage": "verified-https-acceptance",
+        "errorType": "RuntimeError",
+        "failureProgress": {
+          "containerChecksCompleted": 27,
+          "showcaseChecksCompleted": 17,
+          "httpsChecksCompleted": 11,
+          "failureOperation": 3,
+          "failureCode": 0,
+          "failureTypeCode": 7,
+          "lastHttpStatus": 404,
+          "browser": {
+            "expected": 43,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0,
+            "failedSourceLines": [],
+            "failedAssertionLines": [],
+            "failedSessionHttpStatuses": []
+          },
+          "showcaseBrowser": {
+            "expected": 5,
+            "unexpected": 0,
+            "skipped": 0,
+            "flaky": 0,
+            "failedSourceLines": [],
+            "failedAssertionLines": [],
+            "failedSessionHttpStatuses": []
+          }
+        },
+        "cleanup": "PASS"
+      }
+    }
+  ]
+}

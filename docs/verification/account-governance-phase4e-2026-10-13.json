@@ -1,0 +1,478 @@
+{
+  "milestone": "Phase4E account and role governance / last ADMIN protection",
+  "date": "2026-10-13",
+  "timezone": "Asia/Taipei",
+  "baselineCommit": "3fdfbe8d24b93ce14a4667e203b604a260342a3a",
+  "backend": {
+    "cleanPackage": "PASS",
+    "database": "real PostgreSQL17.11",
+    "suites": [
+      {
+        "name": "dev.elpsy.portfolio.AccountGovernanceIntegrationTest",
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "e4043fdf6adeb778d0c97e10e7afcab4e3fcc1f9a17b95f6dc762a83986ca133"
+      },
+      {
+        "name": "dev.elpsy.portfolio.AdminAuthIntegrationTest",
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "bc22e4792eab4102bb8dc82fee9667377272cb3136bdd7a5a622fa26c21ff1c1"
+      },
+      {
+        "name": "dev.elpsy.portfolio.AdminProjectIntegrationTest",
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "e3cf5b61e97a87c7798ece78eda86fca6a7f03d9410351641f19c570e9b0466d"
+      },
+      {
+        "name": "dev.elpsy.portfolio.LoginSafetyIntegrationTest",
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "1b9af22e3a05e0a06af1f52461f314cbfca927c8db0cf90b2949af8044fdab21"
+      },
+      {
+        "name": "dev.elpsy.portfolio.MediaIntegrationTest",
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "656ff2486ed692c2dd85ff0986ade650f8f63afd10507c742d3fb2b6d9bea7ca"
+      },
+      {
+        "name": "dev.elpsy.portfolio.ProjectApiIntegrationTest",
+        "tests": 21,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "reportSha256": "1e531a3555281cebbf2b8dddc0c1cb11f8633a3975739017bcda1c03c11f9a85"
+      }
+    ],
+    "logSha256": "3b266abc618fbed307e08a8a885c9be92944ff4dd90a03c00dd6011d477999df"
+  },
+  "frontend": {
+    "typecheckAndProductionBuild": "PASS",
+    "logSha256": "70162434ac978ef6bd2fc5f69b9d0fccb69737ee4b68b3389a7acc359f275901"
+  },
+  "finalRuntimeExitCode": 0,
+  "runtime": {
+    "outcome": "PASS",
+    "checks": [
+      "default session cookie is Secure/HttpOnly/Strict and scoped",
+      "provisioned PBKDF2 account logs in and rotates session",
+      "default absolute lifetime and rate limits are active",
+      "successful authentication persists a password-free login time",
+      "real admin overview and security authorization",
+      "fresh V1/V2/V3/V4/V5/V6/V7 and normalized seed",
+      "V7 updates only untouched platform introduction to completed account governance",
+      "real public HTTP contracts",
+      "real admin creates draft and public404",
+      "real PNG upload increments aggregate version and is private while draft",
+      "real published write and transactional audit",
+      "real stale expectedVersion409 has no duplicate audit",
+      "real published image serves verified canonical bytes",
+      "real account creation returns only safe fields and transactional audit",
+      "created account authenticates with initial password but cannot read account directory",
+      "real account disable increments version and revokes prior session",
+      "API reads changed PostgreSQL rather than packaged JSON",
+      "JAR restart preserves session and never resets accounts",
+      "JAR restart preserves absolute login time without renewal",
+      "JAR restart preserves governed account version/hash and identity audit",
+      "JAR restart preserves CRUD version and audit",
+      "JAR restart preserves physical image and media metadata",
+      "API restart preserves all table rows and versions without reseed",
+      "real PG outage gives503 health",
+      "real PG outage gives503 catalog without JSON fallback",
+      "real PG outage does not serve image by bypassing publication check",
+      "real PG outage gives503 auth without authenticated fallback",
+      "auth pool recovers after first real PG restart",
+      "identity pool recovers independently after PG restart",
+      "same-volume PG restart recovers original durable data",
+      "same-volume PG restart preserves login session",
+      "PG restart preserves absolute login time without renewal",
+      "PG restart preserves governed account and identity audit",
+      "PG restart preserves written project and audit",
+      "PG restart restores identical canonical image bytes",
+      "real delete keeps prior snapshots and append-only audit",
+      "deleted project revokes public image immediately",
+      "durable retirement queue reclaims physical file without deleting audit",
+      "real logout revokes persisted session and cookie replay",
+      "only own temporary probe restored; seed fingerprint unchanged",
+      "production browser35 with real PostgreSQL and account governance UI",
+      "browser/API startup made no changes to domain or history",
+      "browser never resets account hashes or roles",
+      "real admitted wrong attempt 1 remains generic401",
+      "real admitted wrong attempt 2 remains generic401",
+      "real admitted wrong attempt 3 remains generic401",
+      "real quota exhaustion429 ignores changing forwarding headers",
+      "JAR restart does not reset exhausted durable quota",
+      "real limiter phase PG outage fails closed503",
+      "auth pool recovers after quota-phase real PG restart",
+      "same-volume PG restart does not reset exhausted quota",
+      "expired fixed window permits fresh real authentication",
+      "real absolute expiry blocks protected reads despite recent activity",
+      "real absolute expiry revokes old cookie and yields anonymous fresh CSRF",
+      "real reauthentication renews absolute lifetime after expiry",
+      "login protection phase preserves catalog and account hashes"
+    ],
+    "transport": "packaged JAR / own PostgreSQL17 / production dist",
+    "automaticRetries": 0,
+    "artifactSha256": "f2bc39442729235d2a29294f26f20a7d1b2ff6712a56c5449572f78bf2bb75a1",
+    "baseline": {
+      "category": {
+        "rows": 3,
+        "sha256": "930e91b9b18e7996ed08707261d845d449c16cf9494ee9e726a5aff9e80f6ce0"
+      },
+      "project": {
+        "rows": 5,
+        "sha256": "e12c8a5ec763c7a83503f9138e90608d68411f76ed40a8e790dfa9b4b0b840f8"
+      },
+      "technology": {
+        "rows": 32,
+        "sha256": "edafd1dd14edc127a721ba54a02ad767c3a6aa6c53626fe9e3584169357469a1"
+      },
+      "project_technology": {
+        "rows": 48,
+        "sha256": "49adc9370115e21e1adf095f6a00def8319bf60187e9f69250e7ed945763d79e"
+      },
+      "project_media": {
+        "rows": 7,
+        "sha256": "ef236fb32a134c2704b6143e6b726b2f104f4ffebfedd447a8767d0dfd0297f1"
+      },
+      "project_evidence": {
+        "rows": 14,
+        "sha256": "4bcf49688e7d04b2cb82c908a220715fd35276d26299e70f97e781902cd94e29"
+      },
+      "flyway_schema_history": {
+        "rows": 7,
+        "sha256": "285913f4af21f2f8fbb31d4d1e4f5fb03e6d6ab3eda3c95a006a15b4ef10c6f9"
+      }
+    },
+    "authRecoveryProbes": [
+      [
+        200
+      ],
+      [
+        200
+      ]
+    ],
+    "identityRecoveryProbes": [
+      200
+    ],
+    "browser": {
+      "startTime": "2026-10-13T01:11:29.131Z",
+      "duration": 136823.803,
+      "expected": 35,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "ratePhase": {
+      "accountLimit": 3,
+      "peerLimit": 5,
+      "globalLimit": 8,
+      "windowSeconds": 300,
+      "fixtureClockAging": true,
+      "browserUsesDefaults": true
+    },
+    "passed": 56,
+    "cleanup": {
+      "ownProcessesStopped": true
+    }
+  },
+  "runtimeReportSha256": "d18f6ab9737835563358403438b4797ee0cd4df1f4ce77ba7c18fb4e51b06348",
+  "browserReportSha256": "a9669a686894c91e224b9a358a221d961003c12568e88e575282efb5fd38ddbf",
+  "cleanup": {
+    "ownedScopes": [
+      {
+        "scope": "work/phase4d-test-01",
+        "resources": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        },
+        "mediaFiles": {
+          "objects": 0,
+          "incoming": 0
+        }
+      },
+      {
+        "scope": "work/phase4d-test-02",
+        "resources": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        },
+        "mediaFiles": {
+          "objects": 0,
+          "incoming": 0
+        }
+      },
+      {
+        "scope": "work/phase4d-runtime-01/database",
+        "resources": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        },
+        "mediaFiles": {
+          "objects": 0,
+          "incoming": 0
+        }
+      },
+      {
+        "scope": "work/phase4d-runtime-final/database",
+        "resources": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        },
+        "mediaFiles": {
+          "objects": 0,
+          "incoming": 0
+        }
+      },
+      {
+        "scope": "work/phase4e-runtime-01/database",
+        "resources": {
+          "containers": 0,
+          "volumes": 0,
+          "networks": 0
+        },
+        "mediaFiles": {
+          "objects": 0,
+          "incoming": 0
+        }
+      }
+    ],
+    "ports": {
+      "25486": "connection refused",
+      "25487": "connection refused",
+      "19186": "connection refused",
+      "15186": "connection refused"
+    },
+    "ownProcessesStopped": true
+  },
+  "identityHelper": {
+    "enableIdentityRepeatedOnConfiguredScope": "private env bytes unchanged; existing role not reset"
+  },
+  "testCleanupBeforePurge": {
+    "accounts": 0,
+    "identityAudit": 0,
+    "projectAudit": 0,
+    "images": 0,
+    "upgradeSchemas": 0
+  },
+  "migrationChecks": {
+    "backend/src/main/resources/db/migration/V1__portfolio_catalog.sql": {
+      "sha256": "2d2512fac1cd8392728202840a12f98c5dbdca1b61da11842cfe87c60f655a6a",
+      "sourceEqualsJar": true,
+      "unchangedFromBaseline": true
+    },
+    "backend/src/main/resources/db/migration/V2__initial_catalog.sql": {
+      "sha256": "b61bb2dabab697b01de4aefb78ca4c24010635056b6e2022ba19ededc3331a0e",
+      "sourceEqualsJar": true,
+      "unchangedFromBaseline": true
+    },
+    "backend/src/main/resources/db/migration/V3__admin_sessions.sql": {
+      "sha256": "403c609fd728e8d6b4b2eaf76234722f3b401b1ed6a7b54354276ed1ff173463",
+      "sourceEqualsJar": true,
+      "unchangedFromBaseline": true
+    },
+    "backend/src/main/resources/db/migration/V4__project_management.sql": {
+      "sha256": "ab61fe90b1d44d8d3ba41a10e2f921f0cecb32d9eae32bb050fec542f8aaef21",
+      "sourceEqualsJar": true,
+      "unchangedFromBaseline": true
+    },
+    "backend/src/main/resources/db/migration/V5__managed_images.sql": {
+      "sha256": "0e34042fcd93870d728d05e1022d947d90144236fa110cc4f905446941129b83",
+      "sourceEqualsJar": true,
+      "unchangedFromBaseline": true
+    },
+    "backend/src/main/resources/db/migration/V6__login_limits.sql": {
+      "sha256": "ca239b0be86a263add704080337f66d742f2057f6c0d132b0116b41cf3032f66",
+      "sourceEqualsJar": true,
+      "unchangedFromBaseline": true
+    },
+    "backend/src/main/resources/db/migration/V7__account_governance.sql": {
+      "sha256": "64a6d3b89720f977806556820fc2bdf359e863dbbad4a700317e6feed6645c0b",
+      "sourceEqualsJar": true,
+      "unchangedFromBaseline": false
+    }
+  },
+  "originalPublicAssetsSha256": {
+    "public/favicon.svg": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a",
+    "public/projects/ai-knowledge-assistant/01-workspace.png": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4",
+    "public/projects/ai-knowledge-assistant/02-answer-sources.png": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c",
+    "public/projects/ai-knowledge-assistant/03-insufficient-evidence.png": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1",
+    "public/projects/ai-knowledge-assistant/04-document-library.png": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf",
+    "public/projects/ai-knowledge-assistant/05-untrusted-document.png": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f",
+    "public/projects/ai-knowledge-assistant/06-mobile.png": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1",
+    "public/projects/ai-knowledge-assistant/milestone4-rag-desktop.png": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174",
+    "public/projects/ai-knowledge-assistant/milestone4-rag-mobile.png": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75",
+    "public/projects/e-commerce-platform/order-confirmation.jpg": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35",
+    "public/projects/e-commerce-platform/storefront-desktop.jpg": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec",
+    "public/projects/e-commerce-platform/storefront-mobile.jpg": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08"
+  },
+  "sourceSha256": {
+    "backend/src/main/java/dev/elpsy/portfolio/PortfolioApplication.java": "2c2fe5d1639b2707058d34220b15be1c41929b47be13977170ef80d411215bff",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/AdminProjectController.java": "ce580d3c6571343c5a157a20fe488165dcfa5c65efbdb9dbf62634674c07b141",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/AdminProjects.java": "6e994638976296a7ebd11d96939b2444a175e150bc76609ee4354b287f8a1387",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/ImageCatalog.java": "a2132c109affd34080bf42e2ac7903c5bece38e376b67f50a77958ad47742dd5",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/MediaController.java": "b93998243f58074277eda16dbf2a29b67515b01801bb320354f5efd4b01bb8e7",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/MediaMaintenance.java": "c9abda8c16d7267995986023bdf184fc691ca0da14db71da95cf6121a59fcdb4",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/MediaProjects.java": "c8a491be6cecea25d2887f907f77211abbc0d924cb98a98bf5d49dba296d7dcc",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/ProjectContent.java": "e5ff40871ddd434c2a55df831b53447bb8e7418b2f9bc75548e56616ee042a2c",
+    "backend/src/main/java/dev/elpsy/portfolio/admin/WriterDatabase.java": "d8247ca49453589ea774dd14385d970afd8eb3cbe9eb07f7d92bd79602a9108e",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AbsoluteSessionFilter.java": "6fe98b7b2a8d8d48e308852c7b0c6a36034139380b7b20e98fa55532ce5c9411",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AccountValidityFilter.java": "87ed1ba144e5b006308f7fd29cd30a3262e173cbb64792c4c6dcca517d4496e0",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AdminAccounts.java": "711f29332333e1e486cafd9ea2603647f7b705547ad17e11ef53f52465d5f0cb",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AdminController.java": "6373cddf967499f70451a153612dbbe02dfa4e5b63e92bc094f0d658c13df2ed",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AdminIdentity.java": "96c7b3537ee489812ad75f14a1bc89cb862192055d4dddb70af856d8229de70d",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AdminSecurity.java": "edfba8e4d98cf529fa9037e4099d90c476c283e4f5064c5a3b06bf85af4569af",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AuthAvailabilityFilter.java": "9c89bdc48a2b9bcd9442bf8344d24f217d0f5d458a3080cba5ba0011939beb49",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AuthDatabase.java": "31bbcbdc4b3832c6704a7c42625b836d1b82a9ddef7f47cf50ccfb2320fafd6e",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/AuthResponses.java": "c2c89e16a6ee7e561c3e52036ec127be590910abbf415287e183856a7068e4c5",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/IdentityDatabase.java": "e35e289d9e73d64aec4666dc9074ecb8f46f32fa656143fba1a0c26aa3dbfb30",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/LoginLimits.java": "5538fc81d60c74f960184ad9bfc53962761311f002e2ab897e0752d8c9eeee1a",
+    "backend/src/main/java/dev/elpsy/portfolio/auth/LoginProtectionFilter.java": "789c52a5c07a057f45c58e5b743fc6519851ef9e7d2dfd0abe605693bf729631",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/CatalogDatabaseGuard.java": "d0323597c0632f8ff00c1cb1281d0ad6f6574790e7950a1b484b4f8a040cf38f",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/CatalogErrors.java": "d6aa1d7f5556421dc34daf3e8b4a7022ec3a5c275fa28885118d5ad88148ba4a",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/CatalogProblem.java": "8b86cecd5144691542348bebb088de3179be15e9215cff6557602f9e3735bd13",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/Project.java": "824734e977c54bd35cdf4c1b9ebe5481f59941a5f084985b73f4e2e25a78c5f9",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/ProjectCatalog.java": "b60364a7590a7461d67c43b3814a270ec0973eff102a38088f3aec4c0f8a4114",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/ProjectController.java": "4d1108538dbeb5f537b0fb39f2b48b3058a828bc9ecf007b78b954199e62475f",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/ProjectProjection.java": "cf76c918a6a3e00bcb697564e59218716b0fa810cd9d82f8f86349252f4a4d86",
+    "backend/src/main/java/dev/elpsy/portfolio/catalog/ProjectSummary.java": "1da066e0210fd18a215f6fe440dff63912376a74b6810aadf0f815c20fa82024",
+    "backend/src/main/java/dev/elpsy/portfolio/identity/AccountController.java": "a680324e0c6449003007fd4de81675dcaf00fa2069bb35a332d82e8637408344",
+    "backend/src/main/java/dev/elpsy/portfolio/identity/AccountManagement.java": "3213f27c425860068597761e612b435bf92c8463416cb42ebc39516dc67f6272",
+    "backend/src/main/java/dev/elpsy/portfolio/media/ImageController.java": "d1cb209d8fb2c36f0d72f1ea68e182c92dc160863a30a87005a1caf872431e3c",
+    "backend/src/main/java/dev/elpsy/portfolio/media/ImageNormalizer.java": "3cddbfc5de32aca4abd7f8e52745d368f321cec2fca0786e07e140c6876c5f3d",
+    "backend/src/main/java/dev/elpsy/portfolio/media/ImageStorageProblem.java": "44ca7d87dac4ceb026592196ef14c5df1dcebe98849cc568c571adf47d13404c",
+    "backend/src/main/java/dev/elpsy/portfolio/media/ImageStore.java": "7f039b58fc03b4a6c0d8ec0e1ba64bf66567d758d7f4de2145f8fc0d8514da46",
+    "backend/src/main/java/dev/elpsy/portfolio/media/LocalImageStore.java": "e88d75168328c3e668c74571104c39b40316657aba1fc505d44dab6de8fe62ff",
+    "backend/src/main/java/dev/elpsy/portfolio/media/MediaCleanupSchedule.java": "8d600eb090d160dea5f9541722f7546d52a6f1745ba995de5a8d438e0c6da09f",
+    "backend/src/main/resources/application.yml": "e79ccc3a7bf3e756466803c3b7d4f24828641251bf5c763dececf1b5e054515e",
+    "backend/src/main/resources/db/migration/V1__portfolio_catalog.sql": "2d2512fac1cd8392728202840a12f98c5dbdca1b61da11842cfe87c60f655a6a",
+    "backend/src/main/resources/db/migration/V2__initial_catalog.sql": "b61bb2dabab697b01de4aefb78ca4c24010635056b6e2022ba19ededc3331a0e",
+    "backend/src/main/resources/db/migration/V3__admin_sessions.sql": "403c609fd728e8d6b4b2eaf76234722f3b401b1ed6a7b54354276ed1ff173463",
+    "backend/src/main/resources/db/migration/V4__project_management.sql": "ab61fe90b1d44d8d3ba41a10e2f921f0cecb32d9eae32bb050fec542f8aaef21",
+    "backend/src/main/resources/db/migration/V5__managed_images.sql": "0e34042fcd93870d728d05e1022d947d90144236fa110cc4f905446941129b83",
+    "backend/src/main/resources/db/migration/V6__login_limits.sql": "ca239b0be86a263add704080337f66d742f2057f6c0d132b0116b41cf3032f66",
+    "backend/src/main/resources/db/migration/V7__account_governance.sql": "64a6d3b89720f977806556820fc2bdf359e863dbbad4a700317e6feed6645c0b",
+    "backend/src/test/java/dev/elpsy/portfolio/AccountGovernanceIntegrationTest.java": "5b2584b697fdcb76665d23ae0eefe981cdcdd0b93d16b3e727aa8f7dba8aff7a",
+    "backend/src/test/java/dev/elpsy/portfolio/AdminAuthIntegrationTest.java": "66e48d2130553547d90598c8c5303d74a02bbd453573621d764482ef9a2ce1a1",
+    "backend/src/test/java/dev/elpsy/portfolio/AdminProjectIntegrationTest.java": "27ef7f624ad4842fa3d7221a9215f079aa482cfa6dda3e3f4f7c4f0c45d9a0b0",
+    "backend/src/test/java/dev/elpsy/portfolio/LoginSafetyIntegrationTest.java": "8e9e6e781a2eeb1936085ee398f24aa3a2aa9d848392ad3b911a1fa518e7d3d9",
+    "backend/src/test/java/dev/elpsy/portfolio/MediaIntegrationTest.java": "b0b7c93335706e4c6b30ffd0caf77b93d1d2e7c8af14a4380b87b1384da058ed",
+    "backend/src/test/java/dev/elpsy/portfolio/ProjectApiIntegrationTest.java": "8c450f658e9b0654b68b1cb57c46ffa551978b7eb54aced2a5deff9e82d6d3e9",
+    "src/App.vue": "229a4650b5fcd420d30554d6246a84b60247ec018c070f5d6607d6e7a3ef7775",
+    "src/api/accounts.ts": "cbe83af3494933417a571594114463ee88f13a63f812b07e4df443d2bc271d67",
+    "src/api/admin.ts": "ed7c97d5ebc57e11639451f2fe7b7f11d45c5e671d31765e72567fd3f08fedf4",
+    "src/api/adminProjects.ts": "bdf66a591cc739022e4cdf1da213a2fcdbffa146461d9504778596a6a9f4a76e",
+    "src/api/media.ts": "8546dffdfbe825cdb69331cb0875c862850aa0767c8ac93de760e432457786c2",
+    "src/api/projects.ts": "e8721021c9f386b7646ba9e4ad681f8a600cd2ba212b04d0397dc5f6ba7dc911",
+    "src/components/AdminPairList.vue": "ffe2d7317e7c99c35039acf6b1eec243b07d92aa1cbe410cebaba61da162e217",
+    "src/components/AdminTextList.vue": "d13d29abdd160f28cbb5f1fa9a230c00f72cadb07250c57cf815d0ff84525617",
+    "src/components/AppIcon.vue": "c69831ba0fbd556b87999c9d91eaa3010c63a5a97d21d36f34ecb87563adb7f9",
+    "src/components/PageSection.vue": "2e17ef13930ecb0f977a76925ba5a721ae9190aec990f0e266d785dbf27b773f",
+    "src/components/ProjectCard.vue": "65dec6e286b38e3b3035a168d73e45a97917b51643b6e6cdc00f5def6aa0057a",
+    "src/components/ProjectLinks.vue": "4de3128707b5531dd3e34ebe9b09323b9591a34e26ef394fabe42d7ed81b1a28",
+    "src/components/ProjectLoadState.vue": "b22c5f6abb9dd31b1ea4420056bfdb80be4390de12616bf5fae7eca13cb355db",
+    "src/components/ProjectMediaPlaceholder.vue": "3f472bb39880879f175258ffff74cb19e4a8e0babfaede7b4e1e3be04835fde8",
+    "src/components/ProjectScreenshot.vue": "0f3714bff7d1dccfee938f8947b6eafec9f4a062960b9b551cfcf6cfd4608159",
+    "src/components/ProjectStatusBadge.vue": "bdfd110cb0dd2d7c32dcb18ac68d0be7a11da61a949fccfd2ae0bddeabc7da24",
+    "src/components/ProjectVisual.vue": "5792056eb42050b31638220f4012bca795e58d20c1c854be343dec12fb3ff74d",
+    "src/components/SiteFooter.vue": "587a37a4c7cb6cf9c317e6905ce0e45a0e87f2b3b9589525ff319354be34916b",
+    "src/components/SiteNav.vue": "e6176e2cccb50f17bd6f438063cc1240786ec55bbfd927086e455f886363ebb3",
+    "src/components/SkillBadge.vue": "2edc813a8a860ae382afc8283b8eae44758f6c3e0136627ee00fb67e551b063e",
+    "src/composables/useRemote.ts": "6f08815b23e54e7ea20f25e17f4b4447d48431af78280bd37406fc4b8777fd97",
+    "src/data/profile.ts": "df37b0488afc5e9f9fa2bcfd6ae2663c80db0347f5f2393df271dd971820f4fd",
+    "src/main.ts": "b0b111f54fbe63a10ff05ad4770f61d74950d72d5860f8152eb0a7929c4adea0",
+    "src/router/index.ts": "a1abf2718ab9d5531fd69ae55629b2f8be78ea0b15236c23714697983f8146db",
+    "src/styles.css": "37378e3ca5a1e0ca7a181f71cb0bf50bdf8f3eda0e1a573c9feda9946454ee06",
+    "src/types/project.ts": "52a336ace66decca80643649842db1a8628295f7699dfc05e5fe42889a8c7e40",
+    "src/views/AboutView.vue": "cdd0d24c71c679d1ab27a9b01bb93945eb30f05509cff3dfc4934e8e70d7f64e",
+    "src/views/AdminAccountsView.vue": "48b418849c67130ac921867fb648752f9f6d74ae25e334e4f1709b7d4dff3b15",
+    "src/views/AdminLoginView.vue": "7b3b9729f848d99e25d220fac54c60a2b274aa5ce6f9a9486779728973de6d0f",
+    "src/views/AdminProjectAuditView.vue": "815ad3e92514d125c0e1502fff0af8cad3a52280199330d5f321a1a0b4bd0b2a",
+    "src/views/AdminProjectEditView.vue": "16fd6eb2cbe2c85f1ea75b2359365da27e62c63f369a77eae7da7f57d571bf40",
+    "src/views/AdminProjectMediaView.vue": "ff2ffd70e8bd35dbd6acc49e3006cf20f4f69cbaaef126eb4317954dc264dca9",
+    "src/views/AdminProjectsView.vue": "7c30709a498647c534d8609d49a56ed074188d97d9578737a9cf253821922358",
+    "src/views/AdminView.vue": "90b5c50386bdb4bde0fe85ae7727f1d1b39c172dc8ec677faeaabd12e172b1d4",
+    "src/views/HomeView.vue": "d0bd8a98d7fcb77d33e61d09770fe39d67dd73900b0a36c7fc0895ac33c428c4",
+    "src/views/NotFoundView.vue": "d8554f2404a157be14a63a6ad7d1070e213f2d40397c94ac668b970683ff1ec3",
+    "src/views/ProjectDetailView.vue": "41003044b6e734eb40fef81b3451667e52a6e1f1500b30622669a585ec8de20f",
+    "src/views/ProjectsView.vue": "a03b1898dfa3077310c18f0a22d4a42ccff0f3bfd09de220490b7af153c81f93",
+    "scripts/portfolio_db.py": "727a75af46c37d275a43b068f61f36549e4e504e72dc0626ebb99a8ea99f6883",
+    "scripts/run-backend.mjs": "e920743281679edd82a4dcc107a47b66c7c818c190968e80e368b9e0eb745afa",
+    "scripts/run_persistence_runtime.py": "a128a3134c48ed6f75e938ad8a76c9e1487b4577a5e2c578fd08978d12005aed",
+    "tests/accounts.spec.ts": "f6ead32c28aa14820a9887843f8edcba7eb4328ffd82609c321a203fd43a5348",
+    "tests/admin-projects.spec.ts": "8d08ad1bd5717bc9e4a070a5b8f17864a6d354347f702fbf07bf552ee65a7e75",
+    "tests/admin.spec.ts": "881671b283acbc6a333e93e38618c976161709cb66aa052dd5963e41ee7ece68",
+    "tests/media.spec.ts": "febd28ace5728c297dbae7e523f79089eb9becc9513a80d5e24ff94879dfe1ca",
+    "tests/portfolio.spec.ts": "e7b413ec85bb47feb8b1d513dce9fdde210dfca01a7a1ef2936dbff49717281e",
+    "backend/pom.xml": "4d6476beeb0fef5401f497ace6163982fb9bdaa657978ae0ad0ed741d8061a6e",
+    "package.json": "2fc3a72f24d87a88ff2f96c0ffb90289617f390f124b19523f1ebceb8f46a0cb",
+    "package-lock.json": "f1b36a17c4703b42f5a210f5c62a7a75e168dccfa94400bc108b1f7a5f06bb4c",
+    "playwright.config.ts": "7036f82d544f1f26e9e95921b8fe3ef0a2e7126ecdd8422a62d418a62a7d1074",
+    "vite.config.ts": "fe459eb5bb6949cc1f93b3d732761b9247f1f1398ebf19b836d9be773a77821c",
+    "tsconfig.json": "14ccebb50e8bdbc93274695697ea35306bae0597a2b2dc05c75da25a9c4be4f5",
+    "infra/compose.pg.yml": "d34a4c99dc512ce6f9ed10813f929900c2eff5afe08f6d32b696214005ccf2e5"
+  },
+  "distSha256": {
+    "dist/assets/AboutView-D9J_CmSU.js": "a853290401d0099ee0bb9e21442e482378e499cb9fa594d792143a4c286e466a",
+    "dist/assets/AdminAccountsView-Dum65hFr.js": "66722f5ae78060f0bef057c700053596f0a3cf799284ddb4c07f7494d4d4e365",
+    "dist/assets/AdminLoginView-CE-lDloU.js": "9445f5e5e4254df6e61ac5d04510ceb2c727e11de114a43f81743b5b9d3b0c2e",
+    "dist/assets/AdminProjectAuditView-f1sl-63z.js": "1a9aa7e910ebd585a48f8dd4460354d8e34469c80a991e7c86b85f5e459f046d",
+    "dist/assets/AdminProjectEditView-qkobdK1a.js": "949fce71c4dbf45dfafc948e2f4febdeba909a94f45355aae18a21f90952ab2b",
+    "dist/assets/AdminProjectMediaView-BhrktSI7.js": "8000dbbb4b28631cbe25207a95bf457764ee492a3271dd247d6c79213470f7f5",
+    "dist/assets/AdminProjectsView-CqWcu-Zp.js": "14a2ea90813dd17693413ffa42e92346fbfd867601e37c152d086ec70061ea83",
+    "dist/assets/AdminView-nQAHYsV3.js": "306820dd40130cb969909cc3d1eb346f5ab805999eec152f0f0a73224ecac72f",
+    "dist/assets/HomeView-BDRBLA2u.js": "7993113a222e5bc7ed6c220de0bba47eb2cbcb7e691bc99f1b29273798fe4e4a",
+    "dist/assets/NotFoundView-CVDaAlBO.js": "76682e5b0b50149b64520f6fa2898c4a8f7bdce5733d4397c827fd39baa0c5f4",
+    "dist/assets/PageSection-EsY2eFZx.js": "4881e5a276708db3087d0aab6d600e00314fb207dd1506d8d60cbd0b673d9fc6",
+    "dist/assets/ProjectCard-DNQAV29O.js": "efef1943f0880dddf757dbcecb21ecb03e312199a466f3706e515dd2ee0ad1f6",
+    "dist/assets/ProjectDetailView-Dt-tNo-5.js": "e86ad27eb4fd915afadb4f06a6c467725a33d51de7a864435437885f02d02a65",
+    "dist/assets/ProjectStatusBadge-2Insd7RP.js": "51649330e732c2324ba07de8688534bc19d41614d517503ce1e39778b8cbd5d6",
+    "dist/assets/ProjectsView-WUa8KCKr.js": "3ba67a638f22b2fb21a250dbe953e80db2b95d42eafb85cb8953f79fbcf5b614",
+    "dist/assets/SkillBadge-DWoJSwBF.js": "57d52e0e0f59cf4304f1cb20f6c60b08e93fec8c79f0c69659aa49b3c53c4eb7",
+    "dist/assets/admin-D48U7Whn.js": "b316839390d4bc328f4607e6f0ead96b3edb23e0d28670fcc405cf2fb5109488",
+    "dist/assets/adminProjects-DttcNIIM.js": "6c19018a7dc90cb7cfb2dd75af9d31ac55878ac1f723e8b830a14fe66901904d",
+    "dist/assets/index-ClQY5fC0.js": "cbf2a0f2ba290833871520458855e01cb894acdbd774756bedc9d8ca3388fc6e",
+    "dist/assets/index-DS4r-Zma.css": "59ec724ea41a4afe660c504af89de169a5296a05e3f58bd769c3ff1992fd7996",
+    "dist/assets/profile-CIieAcHU.js": "42bd832a310c8ce570a61a8d4243d34cb8cd613ee3fddd9ae37378fcc9275309",
+    "dist/assets/projects-xJrIsWSf.js": "fa4853a4d1d85d93f81c3d700f4de21b717d4adc0ca0311398abaf273982f3f1",
+    "dist/favicon.svg": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a",
+    "dist/index.html": "b4dfe30129d49e33d184d257ae315f8f2656f582e0752071941e61baf8df1f3b",
+    "dist/projects/ai-knowledge-assistant/01-workspace.png": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4",
+    "dist/projects/ai-knowledge-assistant/02-answer-sources.png": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c",
+    "dist/projects/ai-knowledge-assistant/03-insufficient-evidence.png": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1",
+    "dist/projects/ai-knowledge-assistant/04-document-library.png": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf",
+    "dist/projects/ai-knowledge-assistant/05-untrusted-document.png": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f",
+    "dist/projects/ai-knowledge-assistant/06-mobile.png": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-desktop.png": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-mobile.png": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75",
+    "dist/projects/e-commerce-platform/order-confirmation.jpg": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35",
+    "dist/projects/e-commerce-platform/storefront-desktop.jpg": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec",
+    "dist/projects/e-commerce-platform/storefront-mobile.jpg": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08"
+  },
+  "reviewedScreenshot": {
+    "name": "accounts-390.png",
+    "sha256": "16d3df8e411bd806ffb8cb407edad870f7d42f6528b54437617067ab3fca86c1"
+  },
+  "limits": {
+    "browser": "Account503 and existing failure UI use explicit stubs; real account creation/version/lastADMIN; new synthetic accounts and identity audit retained until own volume purge",
+    "clockFixtures": "Disposable owner modifies window timestamps / Java Long to verify expiry, not an 8-hour soak",
+    "recovery": "Bounded read-only auth readiness probes after PG restoration; statuses retained; no login/write/test assertion retries",
+    "scope": "Only portfolio, free PG and dedicated identity writer; no password reset/SeaweedFS/proxy deployment"
+  }
+}

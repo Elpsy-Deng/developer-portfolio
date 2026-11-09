@@ -1,0 +1,262 @@
+{
+  "milestone": "Phase5A private container delivery and compatible app rollback",
+  "date": "2026-10-13",
+  "baseline": "7b155dfa6723886f6b44fce0c714a1283c9251c0",
+  "outcome": "PASS",
+  "backend": {
+    "suites": 9,
+    "tests": 105,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "command": "Maven clean package, dedicated real PostgreSQL17.11; no skipped tests",
+    "newTests": 6
+  },
+  "frontend": "Vue typecheck and production build passed; fixed dist throughout acceptance",
+  "python": {
+    "backupArtifactGuards": 7,
+    "outcome": "PASS",
+    "deploymentScriptsCompile": "PASS"
+  },
+  "container": {
+    "checksPassed": 27,
+    "checks": [
+      "unmigrated API refuses startup for actual schema validation without creating tables",
+      "one-shot migration exits, API/gateway healthy and schema V1-V9 installed",
+      "API is nonroot/read-only/no capabilities and has no privileged environment",
+      "API mounts only runtime secret plus own media, no owner/bootstrap secret",
+      "API publishes no host port and gateway is nonroot",
+      "container runs the verified package bytes",
+      "Nginx SPA deep link /projects/elpsy-shop",
+      "Nginx SPA deep link /admin/projects",
+      "Nginx SPA deep link /about",
+      "missing static assets return404 rather than HTML",
+      "all43 production browser cases run through real Nginx/container API",
+      "real gateway login ADMIN",
+      "real gateway login VIEWER",
+      "VIEWER cannot read account directory",
+      "missing CSRF cannot mutate taxonomy",
+      "real ADMIN creates private draft with transaction audit",
+      "real ADMIN publishes project; stale version refuses",
+      "real gateway multipart upload persists normalized image/version",
+      "public image follows published PG reference",
+      "API restart preserves original session and image bytes",
+      "API stop gives gateway502/504 while static front stays available",
+      "real PG outage returns503 with no catalog fallback",
+      "same-volume PG restart preserves session/domain/image",
+      "migration replay preserves complete history and edited records",
+      "actual bad candidate refuses enabled Flyway before DB changes",
+      "previous pinned image restored after failed candidate; history/media/session preserved",
+      "production artifacts never changed during acceptance"
+    ],
+    "images": {
+      "app": "sha256:947a576e6a35eab19f4393b575dbf791a451395c4587e7e703cbe2cb7d4722b0",
+      "gateway": "sha256:995a007198dda108164c1fb97d962e4fef70cfd22167bb98b0203ac51c51c852"
+    },
+    "imageBuild": "Final tracked app/gateway Dockerfiles with pinned Temurin/Nginx bases; standard multi-layer images, no compact in final acceptance",
+    "pg": "Existing single-layer PG17.11 base override, fresh dedicated volume/credentials; default official PG image not executed in this milestone",
+    "browser": {
+      "startTime": "2026-10-13T04:23:20.352Z",
+      "duration": 86387.58099999999,
+      "expected": 43,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "artifacts": {
+    "backend/target/developer-portfolio-0.2.0.jar": "597a652c673e3e43d3ae6bc6ad752974127efa253e69f74a36086691553ba22f",
+    "dist/assets/AboutView-7xFGGScM.js": "c3a08b4b5395bdbc7e85ed3a6bdde481a960b8a09ebdd108e5918f5141ef7518",
+    "dist/assets/AdminAccountsView-u_MeyzM_.js": "eee0484b1cab028794dcd0fff72489897142175581426553213d8fa9bfa56cd6",
+    "dist/assets/AdminLoginView-Bv9KH4zH.js": "b918d2582414e708d9e6c9785083d9d53ce6231629bd8f0a75f1c6642d35c526",
+    "dist/assets/AdminPasswordView-BozwMHBi.js": "7be36b77808b9a2af52e8bfac8919c2af58a9f4c82a1e9e280a22e1a79f46df6",
+    "dist/assets/AdminProjectAuditView-BUrnCKbl.js": "4a6119d5a6efd4a3bf88e6ce835dd3a66707a72d35808a36c2234d6dec70fbce",
+    "dist/assets/AdminProjectEditView-Bquryt-B.js": "a54b5bb6c5673009aa086dbe07f85bd94c4940be0d3f3e9c5e558950ff22a749",
+    "dist/assets/AdminProjectMediaView-DbXHlD0n.js": "38f2ab39635d13ff86eb2123dc17cc212edc1a242f49b77a78fc0210ad26db7f",
+    "dist/assets/AdminProjectsView-ZqlKxGbu.js": "579946910ef4659370ff36648d16e11beb368055089066fc36de209ae4b20b72",
+    "dist/assets/AdminTaxonomyView-VA--PHLz.js": "facc9a2e33067822c1cad560b3748317866ab409c1683d3f404d9a7385b6194e",
+    "dist/assets/AdminView-qZTCW6lm.js": "fa422c22dc00972fd8cb51e789cbcf13d3d83522f62631c704812e945593a67f",
+    "dist/assets/HomeView-BGccnJBp.js": "20f9303ed9ffff500812661f3989e09b761d3f00dd403008bfe3bc20b8669483",
+    "dist/assets/NotFoundView-N66T4ks9.js": "82510d3a2ef31706fdb705dede617b981105383a2cae4829db78e0098a439a6f",
+    "dist/assets/PageSection-9faUYKkZ.js": "ec8a7e4cb1e60bb9b014baa4643dea6cde65e398cad9e6242a58e6f8d4312bcc",
+    "dist/assets/PaginationControls-CGxyCE5p.js": "585ebe8b27d7aff8174c0211364fde5983e1674fb0632ecc3966f176e4fb0e8f",
+    "dist/assets/ProjectCard-BUae8qqD.js": "8e77d4def272c778663d3c677b836a71ecd9a1f74332447229dafdbe3e42bc03",
+    "dist/assets/ProjectDetailView-DKkzvwMW.js": "0cbb306d7a0926a9cedf1776e81e734ade0f9335b5084d7a0431eab159b85fac",
+    "dist/assets/ProjectStatusBadge-DOIGupnG.js": "f1463e2c565bae5f9bf1c74528dccf6a26771e91b20e44c290abc302006bdb7e",
+    "dist/assets/ProjectsView-BKEPyiuI.js": "e7a919f67c5be722d67877d66217d0bfff1b1a3c23ce04601c1c3945fb98faa8",
+    "dist/assets/SkillBadge-B2q7qTpc.js": "b83e3a071c7febd36308f133e61d9e85aa9515a5752be79c4933e860da121bc0",
+    "dist/assets/admin-CBuFU0Au.js": "de58a9290bd779aa0aea4be9b13666529c8242abacdd4bb979de3471fc547ff4",
+    "dist/assets/adminProjects-DnlUCU7c.js": "1bef04563be08aee41a76d002872adcd0deb1d9ca1c23c8a2890da6182706d39",
+    "dist/assets/index-D4pap1-g.js": "3b0d6a5eb017d7a602c5d5660860453bbcf25624a8bf539a79b6b3d134a05417",
+    "dist/assets/index-ON6dNSfy.css": "39527ab885dcc680716d46529d54debda722280c2f724d2d36a10806d4cfb207",
+    "dist/assets/profile-CIieAcHU.js": "42bd832a310c8ce570a61a8d4243d34cb8cd613ee3fddd9ae37378fcc9275309",
+    "dist/assets/projects-Bg30AOOs.js": "61988f788a4f77b2cb12920230b5a955ea7292f5e27868adecbfb43dff31ce4d",
+    "dist/favicon.svg": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a",
+    "dist/index.html": "018873802c92c53be862423ba4e75b5752efde49cfb168f3695b905faef8bb8e",
+    "dist/projects/ai-knowledge-assistant/01-workspace.png": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4",
+    "dist/projects/ai-knowledge-assistant/02-answer-sources.png": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c",
+    "dist/projects/ai-knowledge-assistant/03-insufficient-evidence.png": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1",
+    "dist/projects/ai-knowledge-assistant/04-document-library.png": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf",
+    "dist/projects/ai-knowledge-assistant/05-untrusted-document.png": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f",
+    "dist/projects/ai-knowledge-assistant/06-mobile.png": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-desktop.png": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174",
+    "dist/projects/ai-knowledge-assistant/milestone4-rag-mobile.png": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75",
+    "dist/projects/e-commerce-platform/order-confirmation.jpg": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35",
+    "dist/projects/e-commerce-platform/storefront-desktop.jpg": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec",
+    "dist/projects/e-commerce-platform/storefront-mobile.jpg": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08"
+  },
+  "immutable": {
+    "migrations": [
+      {
+        "file": "V1__portfolio_catalog.sql",
+        "sha256": "2d2512fac1cd8392728202840a12f98c5dbdca1b61da11842cfe87c60f655a6a"
+      },
+      {
+        "file": "V2__initial_catalog.sql",
+        "sha256": "b61bb2dabab697b01de4aefb78ca4c24010635056b6e2022ba19ededc3331a0e"
+      },
+      {
+        "file": "V3__admin_sessions.sql",
+        "sha256": "403c609fd728e8d6b4b2eaf76234722f3b401b1ed6a7b54354276ed1ff173463"
+      },
+      {
+        "file": "V4__project_management.sql",
+        "sha256": "ab61fe90b1d44d8d3ba41a10e2f921f0cecb32d9eae32bb050fec542f8aaef21"
+      },
+      {
+        "file": "V5__managed_images.sql",
+        "sha256": "0e34042fcd93870d728d05e1022d947d90144236fa110cc4f905446941129b83"
+      },
+      {
+        "file": "V6__login_limits.sql",
+        "sha256": "ca239b0be86a263add704080337f66d742f2057f6c0d132b0116b41cf3032f66"
+      },
+      {
+        "file": "V7__account_governance.sql",
+        "sha256": "64a6d3b89720f977806556820fc2bdf359e863dbbad4a700317e6feed6645c0b"
+      },
+      {
+        "file": "V8__self_password_change.sql",
+        "sha256": "fc447e30cb7053bfbaa83ec22bae2b3bc37eb9615ad86ae260dec786b89c702b"
+      },
+      {
+        "file": "V9__taxonomy_governance.sql",
+        "sha256": "4520f02f53a2e88d371510ed9b0c8fe1b853bf78fbfe9505595faa9556962624"
+      }
+    ],
+    "publicAssets": [
+      {
+        "file": "public/favicon.svg",
+        "sha256": "026c9e2b00990c8b3014c4f5e85965f98efedaf2dae00ca48a0750352c24f72a"
+      },
+      {
+        "file": "public/projects/ai-knowledge-assistant/01-workspace.png",
+        "sha256": "47f17ee8e4a1fcac35d7fe97c743f255182b465e3359235b44361822f690a6d4"
+      },
+      {
+        "file": "public/projects/ai-knowledge-assistant/02-answer-sources.png",
+        "sha256": "446fd8be24bc1207742697759bfe89bfc4bb7dc70bd71fcee8c098a131643f4c"
+      },
+      {
+        "file": "public/projects/ai-knowledge-assistant/03-insufficient-evidence.png",
+        "sha256": "0d21542a7bfa7d78804509b7e905720a8a3cb3bf30cbb08de770233a63694dc1"
+      },
+      {
+        "file": "public/projects/ai-knowledge-assistant/04-document-library.png",
+        "sha256": "148e94bc78cb7ac93d813da757835c7cba359d2322a577b183f1057982228dbf"
+      },
+      {
+        "file": "public/projects/ai-knowledge-assistant/05-untrusted-document.png",
+        "sha256": "b87b3effeecc7a9e4c66cda873ad785d1fba40bfcd079bf149aa55771fdd4e0f"
+      },
+      {
+        "file": "public/projects/ai-knowledge-assistant/06-mobile.png",
+        "sha256": "371ff44fe188b3089ddd4d88191f4e1d405a0de7eab7f0cb87bccb6f4e4ee2e1"
+      },
+      {
+        "file": "public/projects/ai-knowledge-assistant/milestone4-rag-desktop.png",
+        "sha256": "17c2924c2a9940a66ccc949b5918a52dd041b7250ad1947f9c52a3c219f97174"
+      },
+      {
+        "file": "public/projects/ai-knowledge-assistant/milestone4-rag-mobile.png",
+        "sha256": "32717c986870c4b6fb59d763eaf75f0572151b25c5b1c7fc956ddb6599bb1b75"
+      },
+      {
+        "file": "public/projects/e-commerce-platform/order-confirmation.jpg",
+        "sha256": "cfc25f7b4787c99f27e1d6e437ce0ecb90d2b3b491dc5bcabf31d6dac4388b35"
+      },
+      {
+        "file": "public/projects/e-commerce-platform/storefront-desktop.jpg",
+        "sha256": "ab1eb256171bc9a306186fea3210e942beff954e531b11614fedc0c233cc16ec"
+      },
+      {
+        "file": "public/projects/e-commerce-platform/storefront-mobile.jpg",
+        "sha256": "4c95120304853dbf7a40976896875dd8d56b668bd381b997413a364d48dadc08"
+      }
+    ]
+  },
+  "cleanup": {
+    "scopes": {
+      "phase5a-deploy": {
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0
+      },
+      "phase5a-test": {
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0
+      }
+    },
+    "loopbackPortsClosed": [
+      25486,
+      25490,
+      15190
+    ],
+    "fixtureMediaRemainingInDeployment": 0,
+    "privateEvidenceRetained": true
+  },
+  "failedAttempts": [
+    {
+      "attempt": "package1/2",
+      "failure": "Java access visibility compilation failures; corrected before full package3 105 pass"
+    },
+    {
+      "attempt": "runtime1",
+      "failure": "Unreadable root-owned JAR; initial weak exited/empty-schema assertion is not valid schema evidence"
+    },
+    {
+      "attempt": "runtime2/3",
+      "failure": "VFS ENOSPC during migration; no functional success claimed"
+    },
+    {
+      "attempt": "runtime4 and gateway diagnosis",
+      "failure": "Migration/API healthy; injected proxy made gateway loopback wget return403; -Y off fixes probe"
+    },
+    {
+      "attempt": "runtime5",
+      "failure": "28/43 browser passed; directory redirects used internal port, missing synthetic image fixture; no full success"
+    },
+    {
+      "attempt": "gateway correction builds/runtime6 preflight",
+      "failure": "Local image ID is not Dockerfile FROM reference; inherited nonroot cannot chmod root COPY; fixture build corrected to verified local tag and COPY --chmod. Missing release preflight never counted as acceptance"
+    },
+    {
+      "attempt": "runtime7",
+      "failure": "24 container checks and43 browser passed; bad candidate rejected earlier for unresolved Flyway URL, so guard/rollback assertion not counted"
+    },
+    {
+      "attempt": "runtime8",
+      "result": "27 container checks and43 browser passed on final standard images; fully configured bad candidate reaches intended enabled-Flyway guard and previous pinned image rollback succeeds"
+    }
+  ],
+  "limits": [
+    "Private loopback HTTP only; Secure Cookie disabled only via explicit init option",
+    "No CI/public TLS/trusted forwarding or visitor-specific peer quota acceptance",
+    "Compatible V9 app rollback only, no schema downgrade or automatic disaster cutover",
+    "Default official PG image and user Linux/WSL2 production data/hardware not run this milestone",
+    "Existing43 browser fault UI cases still explicitly stub selected503/429/expiry; real PG/API outage separately executed",
+    "Phase4H full48 backup-restore drill not rerun; seven Python artifact guards rerun",
+    "No other repositories/services changed; only own identified cache/image resources removed; no global prune"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "date": "2026-10-19",
+  "marker": "CD-VERIFY-20261019-A",
+  "baseCommit": "2750b75a1b9d552d4b3d3f51727f4862a82418f5",
+  "scope": "Local modified working tree before commit; hosted CI and publication are verified separately against the subsequent exact main SHA",
+  "sourcePatchSha256": "cd889f84664bc5104fc0962ecb051ec48e77e95f8ff8b55d3d49596fac076f1e",
+  "initialBrowser": {
+    "passed": 42,
+    "failed": 1,
+    "sessionHttpStatus": 503,
+    "gateway502or504": 0
+  },
+  "rootCause": "Concurrent first authenticated session reads inserted the same missing CSRF attribute after login; PostgreSQL spring_session_attributes_pkey conflict became HTTP503.",
+  "baselineControlledReproduction": {
+    "tests": 1,
+    "failures": 1,
+    "observedHttpStatus": 503,
+    "sameDatabaseConstraint": true
+  },
+  "fix": "Generate and save the rotated CSRF token in the login success handler before committing the login response; no schema, API contract, cookie policy, quotas or deployment changes.",
+  "targetedAuthSuite": {
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "pythonGuards": 23,
+  "localVerification": {
+    "schema": 1,
+    "outcome": "PASS",
+    "completedStages": [
+      "python-guards",
+      "backend-package",
+      "frontend-build",
+      "docker-build",
+      "container-browser-acceptance",
+      "verified-https-acceptance"
+    ],
+    "backend": {
+      "suites": 11,
+      "tests": 116,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "deploymentImages": "STANDARD",
+    "runtime": {
+      "checksPassed": 27,
+      "browser": {
+        "expected": 43,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "cleanup": {
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0
+      },
+      "showcase": {
+        "checksPassed": 17,
+        "browser": {
+          "expected": 5,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      }
+    },
+    "https": {
+      "checksPassed": 30,
+      "certificateVerification": "ENABLED",
+      "cleanup": {
+        "containers": 0,
+        "volumes": 0,
+        "networks": 0
+      }
+    },
+    "artifacts": {
+      "jarSha256": "256522a3acb730d0013d970d961c26fc9937c59dca013dc8bf2e6a0b21dfd187",
+      "distTreeSha256": "caa800c5db8a0a88e458973cf360a0f45343759ad9fbd97f5eec1c354ced9872",
+      "migrationCount": 9,
+      "publicAssetCount": 12
+    },
+    "cleanup": "PASS"
+  },
+  "productionMarkerChunk": {
+    "path": "dist/assets/HomeView-DEQRCEuL.js",
+    "sha256": "baf85b7134a7874453d2dbc4f6e908b5d40ee96b5ebcca0ebd80d5034245adc1"
+  },
+  "ubuntu": "Not accessed or modified; deployment must be confirmed by user through existing server/timer."
+}

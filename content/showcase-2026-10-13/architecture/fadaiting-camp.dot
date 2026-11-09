@@ -1,0 +1,16 @@
+digraph G {
+graph [rankdir=LR,bgcolor="#f6f8f4",pad="0.4",nodesep="0.45",ranksep="0.65",fontname="Noto Sans CJK TC",size="12,6!",dpi=110,label="fadaiting-camp\n架構說明圖 · 固定來源程式整理 · 非產品操作截圖",labelloc=t,fontsize=17];
+node [shape=box,style="rounded,filled",fillcolor="white",color="#3b7759",fontname="Noto Sans CJK TC",fontsize=12,margin="0.18,0.13"];
+edge [color="#6b7e70",fontname="Noto Sans CJK TC",fontsize=10];
+web [label="Vue：旅客／營運"];
+api [label="Java25 / Spring Boot4\n角色、CSRF、業務交易"];
+pg [label="PostgreSQL\n逐晚保留／住宿／audit"];
+worker [label="通知 worker\n租約、退避、人工核對"];
+external [label="Email / LINE\n真服務待驗"];
+media [label="MinIO：素材"];
+web -> api [label="HTTPS／HTTP契約"];
+api -> pg [label="交易保存"];
+pg -> worker [label="通知佇列"];
+worker -> external [label="外部結果不明需核對"];
+api -> media [label="素材路徑"];
+}
