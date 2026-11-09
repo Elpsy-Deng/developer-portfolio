@@ -177,7 +177,8 @@ def main():
         T.require(not args.preflight and os.environ.get('GITHUB_REF')=='refs/heads/main','Only main publication')
         T.require(api.get('/repos/Elpsy-Deng/'+repo+'/branches/main')['commit']['sha']==source,'Stale publication refused')
     T.run_verified(api,repo,ci_run,ci_source,T.CI_PATH[repo])
-    T.require(api.get('/repos/Elpsy-Deng/'+repo).get('private') is True,'Only private source repository')
+    # Public repository allowed (owner-approved 2026-11-09); publish only for this exact repository.
+    T.require(api.get('/repos/Elpsy-Deng/'+repo).get('id')==int(os.environ['GITHUB_REPOSITORY_ID']),'Only this source repository')
     out=BASE/'work/release';out.mkdir(parents=True,mode=0o700,exist_ok=False)
     result={'status':'FAIL','project':project,'repository':repo,'source':source,'registry':'NOT DEPLOYED','host':'NOT DEPLOYED'}
     try:
