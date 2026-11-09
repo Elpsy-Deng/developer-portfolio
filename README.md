@@ -1,30 +1,68 @@
 # Developer Portfolio
 
-Java Full Stack / Backend Engineer 求職作品集。Vue串接Java21／Spring Boot公開API，作品、分類、技術、媒體與證據已保存於專屬PostgreSQL／Flyway。管理登入／角色權限與作品 CRUD／版本／稽核已加入，圖片上傳／安全回收與持久登入限流／Session絕對期限已加入，帳號／角色治理與最後管理員保護已加入，本人密碼更改、動態分類／技術治理及公開／管理分頁亦已加入，協調備份與隔離還原工具、私人同源容器交付／獨立 migration／相容 app 回退已加入，CI自動驗證與可審阅的工程案例／架構圖展示版本已加入，私人HTTPS交付／可信gateway來源與匿名Session配額已實作，忘記密碼重設與公開 HTTPS 依[PROJECT_PLAN](docs/PROJECT_PLAN.md)續作。
+*A full-stack engineering portfolio with a PostgreSQL-backed catalog and a role-based content management system.*
 
-每輪先同步遠端 main、讀 [HANDOFF](docs/HANDOFF.md)、核對 Git；里程碑測試/build、更新交接、commit/push main。共同規範見 [PLATFORM_WORKFLOW](docs/PLATFORM_WORKFLOW.md)。
+這是供工程主管與招募人員審閱的求職作品集平台，集中呈現作品功能、技術架構、工程案例與驗證依據。訪客可瀏覽與搜尋作品；擁有者透過管理後台維護內容、圖片與發布狀態，減少展示資料散落於不同倉庫或必須重新建置前端才能更新的問題。
 
-## 目前展示
+## 展示
 
-| 作品 | 現況與邊界 |
+- [公開唯讀展示](https://swaggyserver.tail5b604b.ts.net:8443/)：提供作品瀏覽，不開放訪客操作管理功能。
+- 收錄的作品（首頁精選前四項）：
+  - [發呆亭](https://github.com/jackteng-dev/fadaiting-camp)：露營訂位與現場營運
+  - Figura（畫面仍顯示舊名 ELPSY Shop）：公仔電商，[API](https://github.com/jackteng-dev/figura-api)／[網站](https://github.com/jackteng-dev/figura-web)／[App](https://github.com/jackteng-dev/figura-app)
+  - [Encore](https://github.com/jackteng-dev/encore-ticketing)：排隊與非同步售票
+  - [Atlas](https://github.com/jackteng-dev/atlas-rag)：本地 RAG 知識助理（應用本身未公開）
+- 作品案例與來源依據見[作品目錄](docs/PROJECT_CATALOG.md)；架構圖為說明圖，平台截圖不代表來源應用的操作截圖。
+
+## 主要功能
+
+- 響應式首頁、作品列表、作品詳情與關於頁；支援搜尋、分類／技術篩選與分頁。
+- 公開唯讀 API 從 PostgreSQL 取得作品、技術、媒體與證據，資料庫不可用時回報錯誤，無靜態資料備援。
+- 管理後台支援作品新增、編輯、刪除、發布、排序，以及分類／技術字典維護。
+- ADMIN／VIEWER 角色、帳號啟用與停用、本人密碼更改、Session 撤銷及最後管理員保護。
+- 作品版本衝突檢查、內容變更稽核、PNG／JPEG 上傳、草稿圖片權限與退役圖片回收。
+
+## 技術架構
+
+| 層 | 技術 |
 | --- | --- |
-| 發呆亭 | 預約、現場住宿、角色權限、通知與隔離還原；Cloud 展示收尾，真服務與本機待驗 |
-| ELPSY Shop | 現貨、整筆預購、SeaweedFS、員工治理、Flutter App 第一版；交易 mock、真機/iOS 待驗 |
-| Encore 售票 | 排隊、MQ、Redis Lua、有界壓測/還原/故障證據；持續預扣受 DIRTY gate 限制 |
-| Atlas | 免費真實本地 RAG、混合檢索、引用与權限；品質失敗與本機驗收保留 |
-| Developer Portfolio | 公開API／Vue、PG／Flyway、管理登入／角色權限、作品CRUD／版本／稽核、PNG/JPEG圖片管理、持久登入限流與8小時絕對Session期限、帳號角色／最後管理員保護、本人密碼更改、備份／還原、私人同源 Docker／migration 交付；自架主機自動部署，公開唯讀展示經 Tailscale Funnel |
+| 前端 | Vue 3、TypeScript、Vue Router、Vite、Tailwind CSS |
+| API 與驗證 | Java 21、Spring Boot 3.5.16、Spring Security、Spring Session JDBC |
+| 資料 | PostgreSQL 17、Spring JDBC、Flyway；獨立本機圖片儲存 |
+| 容器交付 | Docker Compose、Nginx 同源入口、獨立 migration 程序 |
+| 驗證與發布 | Maven、Playwright、Python 防護測試、GitHub Actions、私人 GHCR |
 
-首頁精選前四個作品，列表包含平台共五個。日日選物暫緩、RBAC/Python 占位移出展示，沒有刪除那些作品的遠端程式。
+以下為本倉庫容器部署的元件；migration 是更新資料庫時執行的一次性程序。
 
-五個作品各有三個工程案例與一張架構說明圖，內容由[SHOWCASE_CONTENT](docs/SHOWCASE_CONTENT.md)的ADMIN API計畫／審閱／套用流程保存到PG；新部署須明確匯入，V1–V9初始seed不自動變更。
+```mermaid
+flowchart LR
+    Browser[瀏覽器] --> Gateway[Nginx gateway]
+    Gateway --> Frontend[Vue 靜態檔案]
+    Gateway --> API[Spring Boot API]
+    API --> PG[(PostgreSQL)]
+    API --> Media[持久圖片目錄]
+    Migration[獨立 Flyway migration] -.-> PG
+```
 
-內容依固定來源版本整理，詳細查核見 [PROJECT_CATALOG](docs/PROJECT_CATALOG.md)。產品整體保留 In Progress；Cloud 展示完成不等於正式營運。測試與品質數字是各作品歷史條件，不是本平台重新驗收。GitHub 倉庫目前為私人。公開唯讀展示：https://swaggyserver.tail5b604b.ts.net:8443/ （Portfolio 與發呆亭／Shop／Encore 唯讀頁；Atlas 不公開），不填 localhost 連結。
+## 工程重點
 
-Atlas 的兩張真實 RAG 保存截圖來自其第四里程碑；其他封面是裝飾示意。架構圖明確標為說明圖，另有[五張平台頁保存截圖](docs/screenshots/showcase-2026-10-13/README.md)，使用自己隔離PG的合成資料，不能當作來源應用操作截圖。新截圖須使用合成資料，不公開有效 QR、會員個資、Cookie 或秘密。
+- **並行修改與稽核一致性**：寫入時重新核對管理者權限，搭配交易鎖與預期版本檢查，將作品、關聯與稽核放在同一交易；衝突回傳 409，避免覆蓋他人修改。見[作品管理](docs/ADMIN_PROJECTS.md)。
+- **權限與流量邊界**：分離唯讀查詢、管理寫入與 migration 資料庫角色；Session／CSRF、持久登入限流與匿名 Session 配額共同保護後台，gateway 來源宣告須通過私有網路與密鑰核對。見[登入安全](docs/LOGIN_SAFETY.md)與[HTTPS](docs/HTTPS.md)。
+- **圖片與資料庫的生命週期**：實際解碼並重新編碼圖片，以引用與發布狀態控制存取；檔案先落盤，再提交版本與稽核，失敗殘留由具寬限期、可重試的回收程序處理。見[圖片管理](docs/MEDIA_MANAGEMENT.md)。
+- **可核對的內容更新**：展示匯入先產生包含版本與雜湊的審閱計畫，套用前重查目標，透過管理 API 與版本檢查寫入；不自動覆寫既有 seed 或重試未知結果。見[展示內容流程](docs/SHOWCASE_CONTENT.md)。
+- **協調備份與隔離還原**：停止寫入後共同備份 PostgreSQL 與圖片，驗證資料、權限及檔案雜湊，只還原至全新環境；排除 Session 資料，還原後需重新登入。見[備份與還原](docs/BACKUP_RESTORE.md)。
 
-## 啟動與驗證
+## 品質與交付
 
-需要JDK21、Maven3.9、Node>=22.12、npm與Docker Compose v2。本輪Node24，保留lock。只啟動自己的PG／API／前端，不使用其他作品DB或模型。詳見[PERSISTENCE](docs/PERSISTENCE.md)、[ADMIN_AUTH](docs/ADMIN_AUTH.md)、[ADMIN_PROJECTS](docs/ADMIN_PROJECTS.md)、[MEDIA_MANAGEMENT](docs/MEDIA_MANAGEMENT.md)、[LOGIN_SAFETY](docs/LOGIN_SAFETY.md)、[ADMIN_ACCOUNTS](docs/ADMIN_ACCOUNTS.md)與[SELF_PASSWORD_CHANGE](docs/SELF_PASSWORD_CHANGE.md)。預設登入Cookie需HTTPS；只有loopback HTTP驗收明確設PORTFOLIO_COOKIE_SECURE=false。
+[GitHub Actions `verify`](.github/workflows/ci.yml) 在 PR 與 main 更新時執行：隔離 PostgreSQL 的完整 Maven package、前端型別檢查與 production build、Python 防護測試、真 Nginx／容器 API 與 Playwright 回歸，以及使用專用測試 CA、啟用憑證與主機名稱驗證的 HTTPS 驗收。
+
+驗證涵蓋角色／CSRF、版本衝突、圖片存取、服務重啟、資料庫故障與相容版本回退。CI 僅上傳數值與雜湊摘要；歷史結果與測試替身的範圍見[驗證紀錄](docs/VERIFICATION.md)，不視為本次文件修改的測試結果。
+
+交付流程為 PR → `verify` 通過 → 合併 main → main CI 通過 → [發布私人 GHCR 映像](.github/workflows/homelab-release.yml) → 擁有者自架主機定期拉取並部署（pull-based CD）。發布核對來源版本與映像 digest；部署狀態與最近一次實測範圍見[交接紀錄](docs/HANDOFF.md)。
+
+## 本機啟動
+
+需 JDK 21、Maven 3.9、Node.js ≥ 22.12、npm、Python 3 與 Docker Compose v2。從倉庫根目錄執行；測試與展示使用不同的專屬資料庫。
 
 ```bash
 npm ci
@@ -37,56 +75,28 @@ python scripts/portfolio_db.py up --directory work/pg-demo
 PORTFOLIO_COOKIE_SECURE=false python scripts/portfolio_db.py exec --directory work/pg-demo -- npm run backend:start
 ```
 
-另一個終端：
+另一個終端啟動前端：
 
 ```bash
 npm run dev
-npm run build
-npm run preview
 ```
 
-API預設127.0.0.1:19186；前端經同源/api代理。PORTFOLIO_PORT可改API埠，前端另以PORTFOLIO_API_URL指定對應loopback origin。不重用其他作品的服務。build包含型別檢查；dist/、backend/target/不提交。[API契約](docs/PUBLIC_API.md)。
+`PORTFOLIO_COOKIE_SECURE=false` 僅供本機 loopback HTTP；HTTPS 部署須保留 Secure Cookie。前端 production build 使用 `npm run build`，包含型別檢查。完整環境、停止／重啟與保留資料方式見[資料庫與本機設定](docs/PERSISTENCE.md)；建立本機管理帳號見[管理登入](docs/ADMIN_AUTH.md)。
 
-瀏覽器回歸使用 production dist 與自己的 loopback preview，不啟動其他作品或模型：
+## 已知限制
 
-```bash
-npm run build
-# 需要可用Chromium；此例使用系統/usr/bin/chromium，其他機器指定實際可執行檔：
-PORTFOLIO_CHROMIUM_PATH=/usr/bin/chromium python scripts/run_persistence_runtime.py --output work/<全新驗收目錄> --java-home <JDK21目錄>
-```
+- 定位為持續開發的求職展示平台；單機容器與本機圖片儲存，不宣稱高可用或正式營運規模。
+- 尚無忘記密碼重設、外部身分提供者及外部物件儲存整合。
+- 備份為需停止寫入的手動離線快照；尚無加密異地副本、PITR 與量化 RPO／RTO。
+- 倉庫 HTTPS 工具尚未提供 ACME 自動簽發／續期；私有測試 CA 驗收不能替代公開入口的憑證與長期運行驗證。
+- 部分作品仍缺來源應用的實際操作截圖；裝飾封面與架構說明圖不作為功能驗收證據。
 
-完整runtime工具自建PG，使用已build的package JAR與production preview，並實測API/PG restart、登入／CRUD／稽核／圖片bytes保留、登出與DB停機503；要求25487／19186／15186空閒。只跑browser須提供自己scope的DB與合成ADMIN/VIEWER測試帳號env（見runtime工具）；建議使用完整runtime，不借其他作品服務。browser43的登入429／到期与503／不完整／延遲仍是明確route stub；真DB outage由runtime另驗。全部retries=0，結果留ignored work新目錄，不覆寫失敗證據。[結果](docs/VERIFICATION.md)。
+## 文件
 
-## 資料與頁面
-
-- backend/src/main/resources/db/migration/：不可變V1 schema／V2首次seed，V3身份／JDBC Session、V4作品稽核、V5managed images、V6登入配額、V7帳號治理／安全身份稽核、V8本人改密碼、V9分類／技術治理；查詢來源是PG，沒有JSON fallback。
-- backend/src/main/java/dev/elpsy/portfolio/catalog/：Spring JDBC唯讀查詢、摘要／詳情DTO、API、DB guard與503。
-- infra/compose.pg.yml、scripts/portfolio_db.py：自己的PG scope、private env與分離帳號。
-- src/api/projects.ts／composables/useRemote.ts：同源查詢、格式核對、取消及拒絕舊結果；無靜態fallback。
-- src/types/project.ts：共用作品模型。
-- src/data/profile.ts：技術工具依作品來源列出；使用者指定個人資料暫不公開，不編造姓名／聯絡方式／所在地／任職／年資。
-- src/views/：首頁、列表、詳情、關於我、404、管理登入／概覽／作品編輯／圖片管理／稽核。
-- public/projects/：可公開的真實歷史截圖。
-- tests/portfolio.spec.ts、playwright.config.ts：production 瀏覽器回歸。
-
-GitHub 外連帶 noopener noreferrer。未知專案/路由呈現404，搜索包含名稱、摘要、技術與副標題。Phase5A Nginx 已處理 HTML5 history deep link 與 missing asset 404；Vite preview 只供本機驗證。
-
-## 接續範圍
-
-Phase4D登入限流與Session絕對期限已實作：預設每300秒帳號30／連線来源60／全站120次，PG配額不因重啟清零；閒置30分鐘或登入滿8小時需重新認證，舊Session缺timestamp也須重登。忽略轉送標頭，正式可信proxy另驗。圖片仍為免費獨立本機adapter、SeaweedFS尚未串接。Phase4E帳號建立／角色與啟用、最後ADMIN保護、同交易撤銷／安全稽核已加入；既有scope升級先enable-identity，API建立初始密碼由管理員用受信任管道交付。Phase4F本人驗現有密碼後更改已加入，持久配額/版本/安全audit/全部Session撤銷；既有V7 scope升級先enable-credentials。Phase4G動態字典、版本／引用保護／稽核、改名傳播與有界分頁已加入，使用[分類／技術與分頁](docs/TAXONOMY_PAGINATION.md)核對。Phase4H協調備份／隔離還原已加入，操作見[BACKUP_RESTORE](docs/BACKUP_RESTORE.md)。Phase5A私人Docker／獨立migration／相容app回退已加入，操作見[DEPLOYMENT](docs/DEPLOYMENT.md)。Phase5B CI操作見[CI](docs/CI.md)。Phase5C展示內容操作見[SHOWCASE_CONTENT](docs/SHOWCASE_CONTENT.md)，下一步公開HTTPS／可信proxy；忘記密碼的免費可信交付另定。已發布migration不可改checksum，各作品保持獨立。本機HTTPS、App／模型／真服務補驗收見[CLOUD_LOCAL_FOLLOWUP](docs/CLOUD_LOCAL_FOLLOWUP.md)，現在不要求下載到使用者電腦。
-
-Phase4G驗收：99真PG／HTTP tests、74 packaged runtime、43 production browser全過；migration V1–V8／原12圖bytes保持。證據與限制見[VERIFICATION](docs/VERIFICATION.md)，Phase4H已補PG＋圖片協調備份／隔離還原；忘記密碼的免費可信交付管道另定。
-
-備份工具使用Linux／WSL2標準Python與既有PG17容器client，免費／離線，先停自己的API與維護工作；全新scope restore，不覆寫既有volume。排除Session data，保留帳號hash／audit／quota與圖片bytes；原密碼需重新登入。Bundle含私有內容，只留private ignored work，不是加密／異地備援。完整操作與故障復原見[BACKUP_RESTORE](docs/BACKUP_RESTORE.md)。
-
-Phase4H本輪驗收：7 Python防護／48真PG與HTTP backup-restore；99後端、74 runtime、43 browser重新全過，production build成功。來源隔離及復原後權限／媒體／Session行為均實測，證據見[VERIFICATION](docs/VERIFICATION.md)。
-
-Phase5A容器操作／升級／相容回退見 [DEPLOYMENT](docs/DEPLOYMENT.md)。API不持有owner／bootstrap秘密或執行migration；production dist与API由同源loopback Nginx提供。本輪驗收：105後端 tests、27容器檢查及43瀏覽器全過，production build成功；最終固定JAR/dist與標準app/gateway Dockerfile映像執行；公開HTTPS／可信proxy與使用者本機容量仍待；CI已由Phase5B補齊。
-
-Phase5B [GitHub Actions CI](docs/CI.md)以隔離PG跑完整package／frontend build／Docker與真gateway browser回歸，只上傳安全統計與hash；本地驗證與Hosted執行狀態分開記錄於[HANDOFF](docs/HANDOFF.md)。不包含自動部署。
-
-Phase5B已完成本地及[GitHub Hosted CI首輪](https://github.com/Elpsy-Deng/developer-portfolio/actions/runs/38351233282)：105後端／27容器／43browser、build與cleanup/upload全過。安全artifact只有summary.json，原始私有資料不公開。
-
-Phase5C本輪本地全流程：18 Python guards、105後端、27容器／43原有browser，新增17展示API／4展示browser全過；固定SQL／public素材與資料治理保持。[GitHub Hosted本版本](https://github.com/Elpsy-Deng/developer-portfolio/actions/runs/38356320602)亦已成功，實際下載唯一安全摘要核對105／27／43／17／4與cleanup0；詳見[HANDOFF](docs/HANDOFF.md)。
-
-Phase5D操作見[HTTPS](docs/HTTPS.md)：獨立TLS scope、canonical origin、可信peer與PG匿名Session admission；公開網域／部署主機尚未確認。本地初版114後端與build/23guards已過，VFS ENOSPC使本地容器驗收未完成；[本輪GitHub標準映像驗收](https://github.com/Elpsy-Deng/developer-portfolio/actions/runs/38386662847)已通過115後端／27容器／43原browser／17展示API＋5browser／30真TLS checks，唯一安全artifact實際下載核對，見[HANDOFF](docs/HANDOFF.md)。不把private TLS驗證當已公開網站。
+- [公開 API 契約](docs/PUBLIC_API.md)
+- [作品管理、版本與稽核](docs/ADMIN_PROJECTS.md)
+- [帳號與角色治理](docs/ADMIN_ACCOUNTS.md)
+- [容器部署與相容回退](docs/DEPLOYMENT.md)
+- [CI 驗證流程](docs/CI.md)
+- [平台頁面截圖與使用限制](docs/screenshots/showcase-2026-10-13/README.md)
+- [完整開發紀錄（原 README）](docs/DEV_LOG.md)
