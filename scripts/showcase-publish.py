@@ -24,6 +24,8 @@ def module(name,path):
 
 
 T=module('cd_trust',BASE/'scripts/showcase-cd-trust.py')
+# Repository owner from the Actions runtime, so an account rename needs no code change.
+OWNER=os.environ.get('GITHUB_REPOSITORY_OWNER','Elpsy-Deng');T.OWNER=OWNER;REGISTRY=OWNER.lower()
 
 
 def recipe_digest():
@@ -138,9 +140,9 @@ def build(project,repo,out,source):
             T.require(not p.is_symlink(),'No symlinks in minimal image context')
         (ctx/'Dockerfile').write_text(dockerfile)
         package='showcase-'+project+'-'+('api' if project=='encore' and service=='api-a' else service)
-        tag='ghcr.io/elpsy-deng/'+package+':'+source
+        tag='ghcr.io/'+REGISTRY+'/'+package+':'+source
         command(['docker','build','--platform','linux/amd64','--build-arg','JAVA_IMAGE='+images['java21']['image'],
-            '--build-arg','NGINX_IMAGE='+images['nginx']['image'],'--label','org.opencontainers.image.source=https://github.com/Elpsy-Deng/'+repo,
+            '--build-arg','NGINX_IMAGE='+images['nginx']['image'],'--label','org.opencontainers.image.source=https://github.com/'+OWNER+'/'+repo,
             '--label','org.opencontainers.image.revision='+source,'--label','dev.elpsy.showcase.recipe='+recipe_sha,'-t',tag,str(ctx)],'build-'+service,timeout=1800)
         metadata=json.loads(subprocess.check_output(['docker','image','inspect',tag]))[0]
         T.require(metadata['Config']['User'] in ['10001:10001','101:101'],'Nonroot runtime required')
@@ -161,7 +163,7 @@ def main():
     args=parser.parse_args();os.umask(0o077)
     config=json.loads((BASE/'.homelab/release-project.json').read_text());repo=config['repository'];project=config['project']
     T.require(os.environ.get('GITHUB_ACTIONS')=='true' and os.environ.get('RUNNER_ENVIRONMENT')=='github-hosted'
-        and os.environ.get('GITHUB_REPOSITORY')=='Elpsy-Deng/'+repo,'Only original hosted runner')
+        and os.environ.get('GITHUB_REPOSITORY')==OWNER+'/'+repo,'Only original hosted runner')
     token=os.environ.get('GH_TOKEN','');T.require(token,'Ephemeral GitHub token required')
     api=T.GitHub(token);source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     if args.preflight:
@@ -175,10 +177,10 @@ def main():
         event=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
         ci_run=event.get('workflow_run',{}).get('id')
         T.require(not args.preflight and os.environ.get('GITHUB_REF')=='refs/heads/main','Only main publication')
-        T.require(api.get('/repos/Elpsy-Deng/'+repo+'/branches/main')['commit']['sha']==source,'Stale publication refused')
+        T.require(api.get('/repos/'+OWNER+'/'+repo+'/branches/main')['commit']['sha']==source,'Stale publication refused')
     T.run_verified(api,repo,ci_run,ci_source,T.CI_PATH[repo])
     # Public repository allowed (owner-approved 2026-11-09); publish only for this exact repository.
-    T.require(api.get('/repos/Elpsy-Deng/'+repo).get('id')==int(os.environ['GITHUB_REPOSITORY_ID']),'Only this source repository')
+    T.require(api.get('/repos/'+OWNER+'/'+repo).get('id')==int(os.environ['GITHUB_REPOSITORY_ID']),'Only this source repository')
     out=BASE/'work/release';out.mkdir(parents=True,mode=0o700,exist_ok=False)
     result={'status':'FAIL','project':project,'repository':repo,'source':source,'registry':'NOT DEPLOYED','host':'NOT DEPLOYED'}
     try:
