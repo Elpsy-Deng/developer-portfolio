@@ -59,7 +59,7 @@ for (const [slug, title, limitation] of [
       expect(await link.getAttribute('href')).toMatch(/^https:\/\/github\.com\/Elpsy-Deng\/[^/]+\/blob\/[0-9a-f]{7,40}\//)
       expect(await link.getAttribute('rel')).toBe('noopener noreferrer')
     }
-    await expect(page.locator('.project-links')).toContainText('GitHub 存取權')
+    await expect(page.locator('.project-links')).toContainText('原始碼與驗證文件公開於 GitHub')
     await expect(page.getByRole('link', { name: 'Live Demo（在新分頁開啟）' })).toHaveCount(0)
   })
 }
