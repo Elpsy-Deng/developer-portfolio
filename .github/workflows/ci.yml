@@ -3,23 +3,8 @@ name: Portfolio CI
 on:
   push:
     branches: [main]
-    paths: &verification_paths
-      - '.github/workflows/**'
-      - 'backend/**'
-      - 'src/**'
-      - 'public/**'
-      - 'tests/**'
-      - 'scripts/**'
-      - 'infra/**'
-      - 'content/**'
-      - 'package*.json'
-      - '*.config.ts'
-      - 'tsconfig*.json'
-      - 'index.html'
-      - '.dockerignore'
   pull_request:
     branches: [main]
-    paths: *verification_paths
   workflow_dispatch:
   workflow_call:
 
