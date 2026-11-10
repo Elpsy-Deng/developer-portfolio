@@ -134,7 +134,7 @@ def main():
         command(pg.DOCKER+['tag',release['app'],base_tag],'fault-base-tag')
         (fault/'Dockerfile').write_text('FROM '+base_tag+'\nENTRYPOINT ["java","-Xmx256m","-XX:+UseSerialGC","-XX:ActiveProcessorCount=2","-jar","/app/portfolio.jar","--spring.flyway.enabled=true","--spring.flyway.url=jdbc:postgresql://postgres:5432/portfolio_demo"]\nCMD []\n')
         tag='portfolio-app:'+v['COMPOSE_PROJECT_NAME']+'-'+fault_name
-        command(pg.DOCKER+['build','--label','dev.elpsy.portfolio.scope='+v['COMPOSE_PROJECT_NAME'],'--label','dev.elpsy.portfolio.release='+fault_name,'-t',tag,str(fault)],'fault-build')
+        command(pg.DOCKER+['build','--label','dev.jackteng.portfolio.scope='+v['COMPOSE_PROJECT_NAME'],'--label','dev.jackteng.portfolio.release='+fault_name,'-t',tag,str(fault)],'fault-build')
         broken=json.loads(json.dumps(release));broken['release']=fault_name
         broken['app']=subprocess.check_output(pg.DOCKER+['image','inspect','--format','{{.Id}}',tag],env=env,text=True).strip()
         deploy.require(not (d/('release-'+fault_name+'.json')).exists(),'Preserve previous fault release')

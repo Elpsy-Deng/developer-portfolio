@@ -104,7 +104,7 @@ def release(d, v, name):
     require(data['scope'] == v['COMPOSE_PROJECT_NAME'] and data['release'] == name, 'Release belongs to another scope')
     for key in ('app', 'gateway'):
         require(re.fullmatch(r'sha256:[a-f0-9]{64}', data[key]), 'Pinned image ID required')
-        scope = subprocess.check_output(pg.DOCKER + ['image', 'inspect', '--format', '{{ index .Config.Labels "dev.elpsy.portfolio.scope" }}', data[key]], env=pg.environment(), text=True).strip()
+        scope = subprocess.check_output(pg.DOCKER + ['image', 'inspect', '--format', '{{ index .Config.Labels "dev.jackteng.portfolio.scope" }}', data[key]], env=pg.environment(), text=True).strip()
         require(scope == v['COMPOSE_PROJECT_NAME'], 'Image belongs to another scope')
     return data
 
@@ -119,8 +119,8 @@ def build(d, v, name):
         existing = subprocess.run(pg.DOCKER + ['image', 'inspect', tag], env=pg.environment(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         require(existing.returncode != 0, 'Do not overwrite existing image tag')
         iid = d / (key + '-' + name + '.iid')
-        run(d, pg.DOCKER + ['build', '--label', 'dev.elpsy.portfolio.scope=' + v['COMPOSE_PROJECT_NAME'], '--label',
-            'dev.elpsy.portfolio.release=' + name, '--iidfile', str(iid), '-t', tag, '-f', 'infra/' + key + '.Dockerfile', '.'], 'build-' + key, timeout=300)
+        run(d, pg.DOCKER + ['build', '--label', 'dev.jackteng.portfolio.scope=' + v['COMPOSE_PROJECT_NAME'], '--label',
+            'dev.jackteng.portfolio.release=' + name, '--iidfile', str(iid), '-t', tag, '-f', 'infra/' + key + '.Dockerfile', '.'], 'build-' + key, timeout=300)
         result[key] = iid.read_text().strip()
     require(all(hash_file(ROOT / p) == h for p, h in artifacts.items()), 'Artifacts changed during image build')
     save(record, result)
@@ -148,14 +148,14 @@ def compact(d, v, source_name, target_name):
         metadata = json.loads(subprocess.check_output(pg.DOCKER + ['image','inspect',source[key]],env=pg.environment(),text=True))[0]['Config']
         holder = 'portfolio-export-' + os.urandom(6).hex()
         archive = d / (holder + '.tar')
-        run(d, pg.DOCKER + ['create','--name',holder,'--label','dev.elpsy.portfolio.scope='+v['COMPOSE_PROJECT_NAME'],source[key]],'export-create')
+        run(d, pg.DOCKER + ['create','--name',holder,'--label','dev.jackteng.portfolio.scope='+v['COMPOSE_PROJECT_NAME'],source[key]],'export-create')
         try:
             run(d, pg.DOCKER + ['export','-o',str(archive),holder],'export-root')
             archive.chmod(0o600)
             changes=['--change','WORKDIR '+(metadata['WorkingDir'] or '/'),'--change','USER '+metadata['User'],
                      '--change','ENTRYPOINT '+json.dumps(metadata['Entrypoint']),'--change','CMD []',
-                     '--change','LABEL dev.elpsy.portfolio.scope='+v['COMPOSE_PROJECT_NAME'],
-                     '--change','LABEL dev.elpsy.portfolio.release='+target_name]
+                     '--change','LABEL dev.jackteng.portfolio.scope='+v['COMPOSE_PROJECT_NAME'],
+                     '--change','LABEL dev.jackteng.portfolio.release='+target_name]
             # Only public base-image runtime settings; never container env/proxy/secret mounts.
             for item in metadata.get('Env',[]):
                 if item.split('=',1)[0] in ['JAVA_HOME','PATH','LANG','LANGUAGE','LC_ALL','JAVA_VERSION','NGINX_VERSION','NJS_VERSION','NJS_RELEASE','PKG_RELEASE','DYNPKG_RELEASE']:
