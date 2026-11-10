@@ -20,7 +20,7 @@ services:
   migration:
     image: ${PORTFOLIO_APP_IMAGE:?Verified release required}
     user: '${PORTFOLIO_RUNTIME_UID:?Nonroot scope owner}:${PORTFOLIO_RUNTIME_GID:?Scope group}'
-    entrypoint: [java, -Xmx128m, -XX:+UseSerialGC, -XX:ActiveProcessorCount=2, -Dloader.main=dev.elpsy.portfolio.operations.CatalogMigration, -cp, /app/portfolio.jar, org.springframework.boot.loader.launch.PropertiesLauncher, /run/secrets/migration.properties]
+    entrypoint: [java, -Xmx128m, -XX:+UseSerialGC, -XX:ActiveProcessorCount=2, -Dloader.main=dev.jackteng.portfolio.operations.CatalogMigration, -cp, /app/portfolio.jar, org.springframework.boot.loader.launch.PropertiesLauncher, /run/secrets/migration.properties]
     secrets:
       - {source: migration_properties, target: migration.properties}
     read_only: true
@@ -45,7 +45,7 @@ services:
     mem_limit: 512m
     cpus: 1.0
     healthcheck:
-      test: [CMD, java, -Xmx32m, -XX:+UseSerialGC, -Dloader.main=dev.elpsy.portfolio.operations.HealthProbe, -cp, /app/portfolio.jar, org.springframework.boot.loader.launch.PropertiesLauncher]
+      test: [CMD, java, -Xmx32m, -XX:+UseSerialGC, -Dloader.main=dev.jackteng.portfolio.operations.HealthProbe, -cp, /app/portfolio.jar, org.springframework.boot.loader.launch.PropertiesLauncher]
       interval: 5s
       timeout: 8s
       retries: 12

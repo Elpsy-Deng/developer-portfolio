@@ -2,7 +2,7 @@ services:
   postgres:
     image: ${PORTFOLIO_PG_IMAGE:-postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24}
     labels:
-      dev.elpsy.portfolio.scope: ${COMPOSE_PROJECT_NAME:?Own scope required}
+      dev.jackteng.portfolio.scope: ${COMPOSE_PROJECT_NAME:?Own scope required}
     environment:
       POSTGRES_DB: ${PORTFOLIO_DATABASE:?Dedicated database required}
       POSTGRES_USER: portfolio_bootstrap
