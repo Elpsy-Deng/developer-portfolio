@@ -6,12 +6,13 @@
 
 ## 展示
 
-- [公開唯讀展示](https://swaggyserver.tail5b604b.ts.net:8443/)：提供作品瀏覽，不開放訪客操作管理功能。
+- [jackteng.dev](https://jackteng.dev)：公開唯讀版作品集，資料與管理後台同步，管理功能不對外開放。
 - 收錄的作品（首頁精選前四項）：
-  - [發呆亭](https://github.com/jackteng-dev/fadaiting-camp)：露營訂位與現場營運
-  - Figura（畫面仍顯示舊名 ELPSY Shop）：公仔電商，[API](https://github.com/jackteng-dev/figura-api)／[網站](https://github.com/jackteng-dev/figura-web)／[App](https://github.com/jackteng-dev/figura-app)
-  - [Encore](https://github.com/jackteng-dev/encore-ticketing)：排隊與非同步售票
+  - [發呆亭](https://github.com/jackteng-dev/fadaiting-camp)：露營訂位與現場營運，[線上沙盒](https://camp.jackteng.dev)
+  - [Figura](https://github.com/jackteng-dev/figura-web)：公仔電商，[API](https://github.com/jackteng-dev/figura-api)／[網站](https://github.com/jackteng-dev/figura-web)／[App](https://github.com/jackteng-dev/figura-app)，[線上沙盒](https://figura.jackteng.dev)
+  - [Encore](https://github.com/jackteng-dev/encore-ticketing)：排隊與非同步售票，[線上沙盒](https://encore.jackteng.dev)
   - [Atlas](https://github.com/jackteng-dev/atlas-rag)：本地 RAG 知識助理（應用本身未公開）
+- 沙盒資料皆為虛構並每日重置，各沙盒頁面附示範帳號。
 - 作品案例與來源依據見[作品目錄](docs/PROJECT_CATALOG.md)；架構圖為說明圖，平台截圖不代表來源應用的操作截圖。
 
 ## 主要功能
