@@ -1,12 +1,15 @@
 package dev.elpsy.portfolio.operations;
 
-/** Docker readiness needs a real PG-backed response, without another runtime package. */
+/**
+ * Transitional entry point: the deployed Compose files still start this class name.
+ * Delegates to {@link dev.jackteng.portfolio.operations.HealthProbe}; remove once the deployment
+ * configuration references the new package (controlled switch, see server operations).
+ */
+@Deprecated(forRemoval = true)
 public final class HealthProbe {
     private HealthProbe() {}
+
     public static void main(String[] args) throws Exception {
-        var connection = (java.net.HttpURLConnection) java.net.URI.create("http://127.0.0.1:19186/api/public/health").toURL().openConnection();
-        connection.setConnectTimeout(2000); connection.setReadTimeout(4000);
-        try { if (connection.getResponseCode() != 200) System.exit(1); }
-        finally { connection.disconnect(); }
+        dev.jackteng.portfolio.operations.HealthProbe.main(args);
     }
 }
