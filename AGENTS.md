@@ -1,5 +1,20 @@
 # Codex Instructions
 
+## 部署限制（最優先，2026-11-12）
+
+本 repo 的 main 會由作者的自架伺服器自動部署（GitHub Actions 發布映像 → 伺服器 CD 自然輪詢、先備份與隔離演練再切換）。在本機或任何 AI 工具修改時，**下列規則優先於本檔其他內容**：
+
+1. **一律走 PR**：開功能分支、push、開 PR，`verify` CI 通過後才 merge。不可直接 push main、不可 force push（分支保護也會拒絕）。本檔較舊段落提到「push main」者，以本規則為準。
+2. **本機開發用本機資料庫**：用 repo 內的 docker compose／說明啟動全新空資料庫，不要連線或下載正式資料庫，不要把帳密、token、`.env` 寫進 Git。
+3. **受保護路徑（CD 資料契約）**：PR 若修改下列路徑，CD 會拒絕自動部署。請先停下，告知作者在伺服器端執行受控切換（contract switch）後才能 merge：
+   - `backend/src/main/resources/db/migration`（Flyway）
+   - `infra/`
+   - `scripts/portfolio_deploy.py`、`scripts/portfolio_db.py`
+4. 只在本機跑測試、編譯、啟動，不會修改上述檔案（Maven 會把 resources 複製到 `target/`，該目錄已被忽略）。
+5. 正式站以固定的舊 migration 映像執行 DB 遷移；破壞性 schema 變更（刪欄、改型別）需先與作者規劃。
+
+push 前請用 `git diff --stat origin/main` 確認是否動到受保護路徑，並在 PR 說明中註明。
+
 ## Current milestone
 
 Phase 5D: HTTPS delivery, explicitly trusted gateway peer identity and bounded anonymous Session admission, authorized on 2026-10-13. Only modify this repository. Preserve V1–V9, PG-only catalog and existing authentication/CSRF/versions/audits. Verify TLS with a dedicated test CA, never disable certificate verification. Actual public DNS/hosting requires concrete user deployment information; do not claim public launch from private Cloud verification or automatically deploy.
